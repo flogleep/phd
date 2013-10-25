@@ -54,6 +54,16 @@ the normalized discounted cumulative gain by:
 The nDCG represents the quality of the $p$ firsts results, compared to the $p$ best results from the
 full set.
 
+
+\section{Mean reciprocal rank}
+The mean reciprocal rank is a statistic used for evaluating a process producing a 
+list of possible answers to a given query. The smallest the rank of the correct 
+answer, the higher the MRR.
+Let $\mathcal{Q}$ be a set of query and let $\left( r_q \right)_{q \in \mathcal{Q}}$ 
+be the corresponding ranks of the correct answers. The MRR associated to $\mathcal{Q}$ 
+is defined by:
+\[
+  \mathrm{MRR}(\mathcal{Q}) = \frac{1}{|\mathcal{Q}|} \sum_{q \in \mathcal{Q}} \frac{1}{r_q}.
+\]
+
 \end{document}
-
-
