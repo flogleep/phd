@@ -1,0 +1,45 @@
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{WKLS07}
+
+\bibitem[HKV08]{hu2008collaborative}
+Yifan Hu, Yehuda Koren, and Chris Volinsky.
+\newblock Collaborative filtering for implicit feedback datasets.
+\newblock In {\em Data Mining, 2008. ICDM'08. Eighth IEEE International
+  Conference on}, pages 263--272. IEEE, 2008.
+
+\bibitem[KS11]{koren2011ordrec}
+Yehuda Koren and Joe Sill.
+\newblock Ordrec: an ordinal model for predicting personalized item rating
+  distributions.
+\newblock In {\em Proceedings of the fifth ACM conference on Recommender
+  systems}, pages 117--124. ACM, 2011.
+
+\bibitem[LY08]{liu2008eigenrank}
+Nathan~N Liu and Qiang Yang.
+\newblock Eigenrank: a ranking-oriented approach to collaborative filtering.
+\newblock In {\em Proceedings of the 31st annual international ACM SIGIR
+  conference on Research and development in information retrieval}, pages
+  83--90. ACM, 2008.
+
+\bibitem[LZY09]{liu2009probabilistic}
+Nathan~N Liu, Min Zhao, and Qiang Yang.
+\newblock Probabilistic latent preference analysis for collaborative filtering.
+\newblock In {\em Proceedings of the 18th ACM conference on Information and
+  knowledge management}, pages 759--766. ACM, 2009.
+
+\bibitem[WKLS07]{weimer2007cofi}
+Markus Weimer, Alexandros Karatzoglou, Quoc~V Le, and Alex~J Smola.
+\newblock Cofi rank-maximum margin matrix factorization for collaborative
+  ranking.
+\newblock In {\em Advances in neural information processing systems}, pages
+  1593--1600, 2007.
+
+\bibitem[YLS{\etalchar{+}}11]{yang2011collaborative}
+Shuang-Hong Yang, Bo~Long, Alexander~J Smola, Hongyuan Zha, and Zhaohui Zheng.
+\newblock Collaborative competitive filtering: learning recommender using
+  context of user choice.
+\newblock In {\em Proceedings of the 34th international ACM SIGIR conference on
+  Research and development in Information Retrieval}, pages 295--304. ACM,
+  2011.
+
+\end{thebibliography}

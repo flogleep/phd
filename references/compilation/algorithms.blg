@@ -1,0 +1,45 @@
+This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+The top-level auxiliary file: algorithms.aux
+The style file: alpha.bst
+Database file #1: algorithms.bib
+You've used 6 entries,
+            2543 wiz_defined-function locations,
+            593 strings with 5833 characters,
+and the built_in function-call counts, 3551 in all, are:
+= -- 379
+> -- 154
+< -- 6
++ -- 55
+- -- 55
+* -- 231
+:= -- 526
+add.period$ -- 23
+call.type$ -- 6
+change.case$ -- 43
+chr.to.int$ -- 6
+cite$ -- 6
+duplicate$ -- 156
+empty$ -- 265
+format.name$ -- 60
+if$ -- 792
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 6
+newline$ -- 34
+num.names$ -- 18
+pop$ -- 55
+preamble$ -- 1
+purify$ -- 49
+quote$ -- 0
+skip$ -- 140
+stack$ -- 0
+substring$ -- 234
+swap$ -- 66
+text.length$ -- 6
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 48
+warning$ -- 0
+while$ -- 36
+width$ -- 8
+write$ -- 86
