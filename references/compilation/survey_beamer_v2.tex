@@ -15,7 +15,7 @@
 \begin{document}
 
 \begin{frame}
-    \frametitle{Problème}
+    \frametitle{Moteur de recommandations}
 
     \begin{itemize}
         \item Id\'ee : effectuer des suggestions pertinentes pour un
@@ -31,21 +31,27 @@
                 \item Peu de donn\'ees sur chaque utilisateur
                 \item Beaucoup de suggestions diff\'erentes possibles
             \end{itemize}
+        \item Exemples : Amazon, Netflix, publicit\'e cibl\'ee
+            \begin{center}
+            \includegraphics[width=.8\textwidth]{/home/igorcolin/Downloads/amazon.png}
+        \end{center}
+        %Image Amazon
     \end{itemize}
 \end{frame}
 
 \begin{frame}
-    \frametitle{M\'ethode g\'en\'erale}
+    \frametitle{Compl\'etion de matrice}
 
     \begin{itemize}
         \item Pour chaque contenu consomm\'e, un utilisateur \'emet un avis
             \begin{itemize}
             \item Explicite : note sur 5, j'aime
-            \item Implicite : dur\'ee de consultation d'une page, d'une vid\'eo
+            \item Implicite : dur\'ee de consultation d'une page, d'une vid\'eo, partage de lien
         \end{itemize}
         \item<2-> Pr\'ediction des avis qu'\'emettrait un utilisateur pour les
             contenus non consomm\'es
-        \item<3-> Suggestion des contenus aux avis pr\'edits les plus favorables
+        \item<3-> Suggestion des contenus aux avis pr\'edits les plus favorables et
+            mesure de la performance
     \end{itemize}
     \[
         \begin{array}{|r|c|c|c|c|}
@@ -86,8 +92,8 @@
             \end{itemize}
         \item<4-> Inconv\'enients :
             \begin{itemize}
+                \item Quelle similarit\'e ?
                 \item N'utilise que les donn\'ees de l'utilisateur courant
-                \item N\'ecessite une compr\'ehension/mod\'elisation des contenus
                 \item Impossible d'effectuer une recommandation pour un
                     nouvel utilisateur
             \end{itemize}
@@ -130,12 +136,10 @@
             \begin{itemize}
                 \item D\'efinir un modèle pr\'edictif
                     \begin{itemize}
-                        \item ex : $note_{u,c} = m + f(u) + g(c)$
+                        \item ex : $avis(u,c) = m + f(u) + g(c)$
                     \end{itemize}
                 \item Utiliser l'ensemble des donn\'ees pour apprendre
-                    les paramètres du modèle
-                \item Utiliser ces paramètres pour pr\'edire les
-                    avis manquants
+                    les paramètres du modèle et pr\'edire les avis manquants
             \end{itemize}
         \item<3-> Avantages :
             \begin{itemize}
@@ -153,7 +157,7 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Conclusion}
+    \frametitle{Compl\'etion de matrice}
 
     \begin{itemize}
         \item M\'ethodes vari\'ees
