@@ -15,45 +15,110 @@
 \begin{document}
 
 \begin{frame}
-    \frametitle{Rappel du problème}
+    \frametitle{Principe de l'application}
 
     \begin{itemize}
-        \item Application de partage de donn\'ees (messages, vid\'eos, images, fichier)
-        \item Objectif : int\'egrer un moteur de recommandation d'\'ev\'enements
+        \item Partage entre utilisateurs
             \begin{itemize}
-                \item Possibilit\'e d'accepter ou refuser une recommandation (feedback)
-                \item Possibilit\'e de partage de la recommandation vers d'autres utilisateurs (liens entre utilisateurs)
+                \item texte
+                \item image
+                \item vidéo
+                \item géolocalisation
+                \item fichier
+            \end{itemize}
+        \item Recommandations d'événements
+            \begin{itemize}
+                \item personnalisées
+                \item possibilité de faire suivre à d'autres utilisateurs
+            \end{itemize}
+        \item Objectif
+            \begin{itemize}
+                \item modéliser les échanges d'informations
+                \item établir profils et liens entre utilisateurs
+                \item faire des recommandations personnalisées
             \end{itemize}
     \end{itemize}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Formalisation}
+    \frametitle{Graphes}
 
     \begin{itemize}
-        \item Population $V = \{ v_1, \dots, v_n \}$
-        \item Connexions $E = \{ (u,v,e) \text{, tel que } (u,v) \in V \times V \text{ et } u \text{ a recommand\'e l'\'ev\'enement } e \text{ à } v \}$
-        \item Objectif : pouvoir caract\'eriser un utilisateur à partir de ses connexions
+        \item Graphe $G = (V,E)$
+        \item N\oe{}uds $V = \{v_1,\ldots,v_n\}$
+        \item Arrêtes $E = \{e_1,\ldots,e_m\}$
+            \begin{itemize}
+                \item $e = (u,v) \in V \times V$
+                \item $e = (u,v,l) \in V \times V \times L$
+                \item si $L \subset \mathbb{R}$, matrice d'adjacence
+            \end{itemize}
     \end{itemize}
 \end{frame}
 
 \begin{frame}
-    \frametitle{D\'etection de communaut\'e}
+    \frametitle{Statistiques}
 
     \begin{itemize}
-        \item Id\'ee : à partir de la structure d'un graphe $G = (V,E)$, identifier des groupes
-            de personnes à connexions pr\'ef\'erentielles
-        \item Fonctionnement :
+        \item Degré :
             \begin{itemize}
-                \item Choix d'un critère de s\'eparation à optimiser
-                \item Recherche (approximation) de la partition de 2 sous-graphes optimisant le critère
-                \item R\'ep\'etition sur les sous-graphes obtenus jusqu'à obtenion d'une partition satisfaisante
+                \item entrant, sortant
+                \item moyenne, minimum, maximum
+                \item distribution (loi puissance)
             \end{itemize}
-        \item \`A d\'eterminer :
+        \item Diamètre
             \begin{itemize}
-                \item Critère à optimiser
-                \item Condition d'arrêt
+                \item réel
+                \item efficace
             \end{itemize}
+        \item Condutance / expansion
+        \item Modularité
+        \item Matrice laplacienne
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Génération de graphes}
+
+    \begin{itemize}
+        \item Objectif : pouvoir générer des graphes aux propriétés similaires
+        \item Méthodes
+            \begin{itemize}
+                \item Attachement préférentiel
+                \item \textit{Forest Fire}, Kronecker (Leskovec 2005, 2007)
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Détection de communautés}
+
+    \begin{itemize}
+        \item Un graphe peu contenir des sous-graphes très connectés
+        \item 2 utilisateurs d'un même sous-graphe peuvent avoir un profil
+            similaire
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Propagation de l'information}
+
+    \begin{itemize}
+        \item Détection de communauté : structure du graphe
+        \item Modéliser la propagation de l'information
+            \begin{itemize}
+                \item Théorie de la survie
+                \item Influences dans un réseau (Kempe et al 2003)
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Statique vs dynamique}
+
+    \begin{itemize}
+        \item Beaucoup de modèles/méthodes basées sur des graphes statiques
+        \item En réalité, $G(t) = (V(t), E(t))$
+        \item Nécessité de méthodes adaptées (online)
     \end{itemize}
 \end{frame}
 
