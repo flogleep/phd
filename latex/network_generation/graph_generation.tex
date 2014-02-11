@@ -1,0 +1,61 @@
+%        File: graph_generation.tex
+%     Created: Tue Feb 11 11:00 AM 2014 C
+% Last Change: Tue Feb 11 11:00 AM 2014 C
+%
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+
+\usepackage[]{amsfonts}
+\usepackage[]{amsmath}
+
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+
+\title{Génération de graphes}
+\author{Igor Colin}
+\date{\today}
+
+\begin{document}
+
+\section{Méthodes MCMC}
+\label{sec:methodes_mcmc}
+    Soit $G = (V, E)$ un graphe non orienté. Pour $i \in V$, on note $d_i$ le
+    degré du n\oe{}ud $i$. On note également $D^{(1)}$ la distribution des
+    degrés du graphe. Autrement dit, pour $n \in \mathbb{N}$,
+    \[
+        D^{(1)}(n) = \frac{|\{i \in V, d_i = n\}|}{|V|}.
+    \]
+    Enfin, on note $D^{(2)}$ la distribution jointe des degrés, définie pour
+    $(n, p) \in \mathbb{N} \times \mathbb{N}$ par :
+    \[
+        D^{(2)}(n, p) = \frac{|\left\{ (i, j) \in E, (d_i, d_j) = (n, p)
+            \text{ ou } (d_i, d_j) = (p, n)\right\}|}{|E|}.
+    \]
+    L'objectif des méthodes MCMC pour la génération de graphe est de partir
+    d'un graphe existant et de modifier aléatoirement ses arrêtes, tout en
+    conservant la distribution jointe des degrés initiale. Pour ce faire,
+    cette méthode procède comme indiqué dans l'Algorithme~\ref{alg:mcmc}.
+
+    \begin{algorithm}
+        \caption{Algorithme MCMC pour la génération de graphe.}
+        \label{alg:mcmc}
+        \begin{algorithmic}
+            \Require $V, E, N_{max}$
+            \State $E^{(0)} \gets E$
+            \State $i \gets 1$
+            \While{$i \leq N_{max}$}
+            \State $(e_1, e_2) \gets \text{rand}(E^{(i-1)})$
+            \State $(f_1, f_2) \gets \text{rand}(\left\{ (u, v) \in E^{(i-1)}, d_u = d_{e_1} \right\})$
+            \State $E^{(i)} \gets E^{(i-1)} \backslash \left\{ (e_1, e_2), (f_1, f_2) \right\}$
+            \State $E^{(i)} \gets E^{(i)} \cup \left\{ (e_1, f_2), (f_1, e_2) \right\}$
+            \State $i \gets i + 1$
+            \EndWhile \\
+            \Return $(V, E^{(N_{max})})
+        \end{algorithmic}
+    \end{algorithm}
+
+\end{document}
+
+

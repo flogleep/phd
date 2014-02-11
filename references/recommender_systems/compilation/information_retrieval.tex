@@ -1,0 +1,78 @@
+%        File: dcg.tex
+%     Created: Fri Oct 25 11:00 AM 2013 C
+% Last Change: Fri Oct 25 11:00 AM 2013 C
+%
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+\begin{document}
+
+\section{Discounted cumulative gain}
+
+Discounted cumulative gain is a measure of the quality of a search engine, in
+information retrieval.
+
+\subsection{Cumulative gain}
+Let $\left\{ X_1, \ldots, X_N \right\}$ be the first $N$ results of a given
+query and let $rel(\cdot)$ be the associated relevance function. The cumulative
+gain at rank $p \le N$ is defined by:
+\[
+  \mathrm{CG}_p = \sum_{i = 1}^{p} rel(X_i).
+\]
+It is simply the cumulated relevance of the first $p$ results.
+
+\subsection{Discounted cumulative gain}
+Cumulative gain does not take into account the fact that a relevant result
+should be penalized if it appears at a large rank. The discounted cumulative
+gain is based on the cumulative gain definition but the relevance is penalized
+logarithmically proportional to the rank of the result. There are two
+definitions of the discounted cumulative gain. Even if they are quite similar,
+they are not equivalent. The first definition is given by:
+\[
+  \mathrm{DGC}_p = rel(X_1) + \sum_{i = 2}^{p} \frac{rel(X_i)}{\log_2(i)}.
+\]
+The second definition is given by:
+\[
+  \mathrm{DGC}_p = \sum_{i = 1}^{p} \frac{2^{rel(X_i)} - 1}{\log_2(i + 1)}.
+\]
+%TODO: check theoretical explanation about log_2 on denominator
+
+\subsection{Normalized discounted cumulative gain}
+DCG can be useful to characterize a search engine's performance in response to
+one query. However, it does not allow for consistent comparison for different
+queries: the length of the results list can vary and this is not taken into
+account by DCG alone. Let $\mathrm{IDCG}_p$ be defined for $p \le N$ as follow:
+\[
+  \mathrm{IDCG}_p = \max_{\sigma \in \mathfrak{S}} 
+  DCG_p\left( \left( X_{\sigma(1)}, \ldots, X_{\sigma(p)} \right) \right).
+\]
+This represents the best DCG possible considering $p$ results from the full
+list. We then define the normalized discounted cumulative gain by:
+\[
+  nDCG_p = \frac{DCG_p}{IDCG_p}.
+\]
+The nDCG represents the quality of the $p$ firsts results, compared to the $p$
+best results from the full set.
+
+Normalized discounted cumulative gain can be very useful when addressing a
+ranking problem for a recommender. The problem is then to sort recommandations
+and to show the top-$N$ ones, where $N$ is very small compared to the total
+number of possible recommendations. Hence, it is important that top 
+recommendations are more emphasized than other ones.
+
+\section{Mean reciprocal rank}
+The mean reciprocal rank is a statistic used for evaluating a process producing
+a list of possible answers to a given query. The smallest the rank of the
+correct answer, the higher the MRR. Let $\mathcal{Q}$ be a set of query and let
+$\left( r_q \right)_{q \in \mathcal{Q}}$ be the corresponding ranks of the
+correct answers. The MRR associated to $\mathcal{Q}$ is defined by:
+\[
+  \mathrm{MRR}(\mathcal{Q}) = \frac{1}{|\mathcal{Q}|}
+  \sum_{q \in \mathcal{Q}} \frac{1}{r_q}.
+\]
+
+\end{document}

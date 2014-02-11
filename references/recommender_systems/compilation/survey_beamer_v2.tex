@@ -1,0 +1,174 @@
+\documentclass[c]{beamer}
+
+\usetheme{default}
+\usefonttheme{structurebold}
+
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+\usepackage[]{amsmath}
+\usepackage{amsfonts}
+
+\author{Igor Colin}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+    \frametitle{Moteur de recommandations}
+
+    \begin{itemize}
+        \item Id\'ee : effectuer des suggestions pertinentes pour un
+            utilisateur
+        \item Donn\'ees disponibles :
+            \begin{itemize}
+                \item Historiques des utilisateurs
+                \item Informations sur les suggestions disponibles
+                \item Liens entre les utilisateurs
+            \end{itemize}
+        \item Challenges :
+            \begin{itemize}
+                \item Peu de donn\'ees sur chaque utilisateur
+                \item Beaucoup de suggestions diff\'erentes possibles
+            \end{itemize}
+        \item Exemples : Amazon, Netflix, publicit\'e cibl\'ee
+            \begin{center}
+            \includegraphics[width=.8\textwidth]{/home/igorcolin/Downloads/amazon.png}
+        \end{center}
+        %Image Amazon
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Compl\'etion de matrice}
+
+    \begin{itemize}
+        \item Pour chaque contenu consomm\'e, un utilisateur \'emet un avis
+            \begin{itemize}
+            \item Explicite : note sur 5, j'aime
+            \item Implicite : dur\'ee de consultation d'une page, d'une vid\'eo, partage de lien
+        \end{itemize}
+        \item<2-> Pr\'ediction des avis qu'\'emettrait un utilisateur pour les
+            contenus non consomm\'es
+        \item<3-> Suggestion des contenus aux avis pr\'edits les plus favorables et
+            mesure de la performance
+    \end{itemize}
+    \[
+        \begin{array}{|r|c|c|c|c|}
+            \hline
+            & C_1 & C_2 & C_3 & C_4 \\
+            \hline
+            U_1 & 4 & 5 & \only<1>{-} \only<2->{\textcolor{red}{3}}  & \only<1>{-} \only<2>{\textcolor{red}{5}} \only<3>{\fcolorbox{blue}{white}{\textcolor{red}{5}}}\\
+            \hline
+            U_2 & 3 & \only<1>{-} \only<2>{\textcolor{red}{3}} \only<3>{\fcolorbox{blue}{white}{\textcolor{red}{3}}}& 3 & \only<1>{-} \only<2->{\textcolor{red}{1}} \\
+            \hline
+        U_3 & \only<1>{-} \only<2>{\textcolor{red}{3}} \only<3>{\fcolorbox{blue}{white}{\textcolor{red}{3}}}& \only<1>{-} \only<2->{\textcolor{red}{1}} & \only<1>{-} \only<2->{\textcolor{red}{2}} & 1 \\
+            \hline
+        \end{array}
+    \]
+\end{frame}
+
+\begin{frame}
+    \frametitle{M\'ethodes bas\'ees sur le contenu}
+
+    \begin{itemize}
+        \item Principe : sugg\'erer des objets proches de ceux appr\'eci\'es
+            dans le pass\'e
+        \item<2-> M\'ethode :
+            \begin{itemize}
+                \item Caract\'eriser les contenus pour d\'efinir une mesure de
+                    similarit\'e
+                    \begin{itemize}
+                        \item $s(\text{Harry Potter 1}, \text{Harry Potter 2}) = 0.9$
+                        \item $s(\text{Harry Potter 1}, \text{Annie Hall}) = 0.1$
+                    \end{itemize}
+                \item Utiliser l'historique des contenus de
+                l'utilisateur pour pr\'edire les avis
+            \end{itemize}
+        \item<3-> Avantages :
+            \begin{itemize}
+                \item Peu coûteux
+                \item Nouveau contenu peut être recommand\'e
+            \end{itemize}
+        \item<4-> Inconv\'enients :
+            \begin{itemize}
+                \item Quelle similarit\'e ?
+                \item N'utilise que les donn\'ees de l'utilisateur courant
+                \item Impossible d'effectuer une recommandation pour un
+                    nouvel utilisateur
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{M\'ethodes collaboratives historiques}
+
+    \begin{itemize}
+        \item Principe : sugg\'erer des contenus appr\'eci\'es par les
+            utilisateurs aux goûts similaires
+        \item<2-> M\'ethode :
+            \begin{itemize}
+                \item D\'eterminer les similarit\'es entre utilisateurs
+                    à partir des avis sur des contenus communs
+                \item Effectuer une pr\'ediction gr\^ace aux avis d\'ejà \'emis
+                    par des utilisateurs similaires
+            \end{itemize}
+        \item<3-> Avantages :
+            \begin{itemize}
+                \item Utilise l'ensemble des donn\'ees à disposition
+                \item Ne n\'ecessite pas de compr\'ehension des contenus
+            \end{itemize}
+        \item<4-> Inconv\'enients :
+            \begin{itemize}
+                \item Impossible de recommander un nouveau contenu
+                \item Impossible d'effectuer une recommandation pour un
+                    nouvel utilisateur
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{M\'ethodes collaboratives avec modèle}
+
+    \begin{itemize}
+        \item Principe : apprendre un modèle pour pr\'edire les avis
+        \item<2-> M\'ethode :
+            \begin{itemize}
+                \item D\'efinir un modèle pr\'edictif
+                    \begin{itemize}
+                        \item ex : $avis(u,c) = m + f(u) + g(c)$
+                    \end{itemize}
+                \item Utiliser l'ensemble des donn\'ees pour apprendre
+                    les paramètres du modèle et pr\'edire les avis manquants
+            \end{itemize}
+        \item<3-> Avantages :
+            \begin{itemize}
+                \item Utilise l'ensemble des donn\'ees à disposition
+                \item Bonne qualit\'e de pr\'ediction lorsque modèle adapt\'e
+            \end{itemize}
+        \item<4-> Inconv\'enients :
+            \begin{itemize}
+                \item Souvent coûteux
+                \item Impossible de recommander un nouveau contenu
+                \item Impossible d'effectuer une recommandation pour un
+                    nouvel utilisateur
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Compl\'etion de matrice}
+
+    \begin{itemize}
+        \item M\'ethodes vari\'ees
+        \item Adapt\'ees à un grand nombre de problèmes
+        \item Plusieurs inconv\'enients communs :
+            \begin{itemize}
+                \item Pas de recommandation pour un nouvel utilisateur
+                \item Ne propose que du contenu similaire
+            \end{itemize}
+        \item Regarder les approches par bandits (exploration/exploitation)
+    \end{itemize}
+\end{frame}
+
+\end{document}

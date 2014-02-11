@@ -1,0 +1,60 @@
+\documentclass[c]{beamer}
+
+\usetheme{default}
+\usefonttheme{structurebold}
+
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+\usepackage[]{amsmath}
+\usepackage{amsfonts}
+
+\author{Igor Colin}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+    \frametitle{Rappel du problème}
+
+    \begin{itemize}
+        \item Application de partage de donn\'ees (messages, vid\'eos, images, fichier)
+        \item Objectif : int\'egrer un moteur de recommandation d'\'ev\'enements
+            \begin{itemize}
+                \item Possibilit\'e d'accepter ou refuser une recommandation (feedback)
+                \item Possibilit\'e de partage de la recommandation vers d'autres utilisateurs (liens entre utilisateurs)
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Formalisation}
+
+    \begin{itemize}
+        \item Population $V = \{ v_1, \dots, v_n \}$
+        \item Connexions $E = \{ (u,v,e) \text{, tel que } (u,v) \in V \times V \text{ et } u \text{ a recommand\'e l'\'ev\'enement } e \text{ à } v \}$
+        \item Objectif : pouvoir caract\'eriser un utilisateur à partir de ses connexions
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{D\'etection de communaut\'e}
+
+    \begin{itemize}
+        \item Id\'ee : à partir de la structure d'un graphe $G = (V,E)$, identifier des groupes
+            de personnes à connexions pr\'ef\'erentielles
+        \item Fonctionnement :
+            \begin{itemize}
+                \item Choix d'un critère de s\'eparation à optimiser
+                \item Recherche (approximation) de la partition de 2 sous-graphes optimisant le critère
+                \item R\'ep\'etition sur les sous-graphes obtenus jusqu'à obtenion d'une partition satisfaisante
+            \end{itemize}
+        \item \`A d\'eterminer :
+            \begin{itemize}
+                \item Critère à optimiser
+                \item Condition d'arrêt
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\end{document}

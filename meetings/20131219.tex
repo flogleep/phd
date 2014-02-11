@@ -1,0 +1,85 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+
+\usepackage[left=3cm, right=3cm]{geometry}
+
+\title{Compte-rendu de la r\'eunion du 19 d\'ecembre 2013}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{description}
+    \item[Pr\'esents]\hfill
+        \begin{itemize}
+            \item Thomas Bouton
+            \item St\'ephan Cl\'emençon
+            \item Igor Colin
+            \item Joseph Salmon
+        \end{itemize}
+    \item[Ordre du jour]\hfill
+        \begin{itemize}
+            \item Apporter quelques pr\'ecisions suppl\'ementaires sur l'application
+            \item Exposer les possibilit\'es de d\'eveloppement
+        \end{itemize}
+\end{description}
+
+\section{Pr\'ecision sur l'application}
+\label{sec:precision_application}
+
+\begin{description}
+    \item[Donn\'ees socio-d\'emographiques :] Les donn\'ees de ce type pouvant
+        être r\'ecolt\'ees sont limit\'ees. L'application a accès à la carte SIM,
+        au carnet d'adresse et au GPS. Le carnet d'adresse peut donner de
+        bonnes indications sur le sexe des contacts et le GPS peut permettre
+        de d\'eterminer la position du lieu de travail ou du domicile.
+    \item[Recommandations :] Une vingtaine de cat\'egories existe \emph{a priori}.
+        Concernant les publicit\'es, il existe un arbre de cat\'egories dont
+        la profondeur permet d'être très sp\'ecifique. Il sera donc utile
+        de mettre de la structure dans ces cat\'egories pour identifier
+        les combinaisons de goûts les plus communes.
+\end{description}
+
+\section{Possibilit\'es de recherche}
+\label{sec:possibilite_recherche}
+
+\begin{description}
+    \item[Simulation de graphes :] Ce champ est très ouvert ; il n'existe
+        pas de m\'ethode permettant de g\'en\'erer rapidement des donn\'ees
+        proches des donn\'ees r\'eelles. Un \'etat de l'art pr\'ecis de ce
+        domaine doit être fait pour pouvoir reconstituer le graphe et ses
+        propri\'et\'es.
+    \item[D\'etection de communaut\'es :] Plusieurs approches sont possibles
+        (it\'erative, spectrale). Il est n\'ecessaire, au moins dans la première
+        phase de croissance de l'application, d'avoir une approche
+        en ligne permettant de mettre à jour au fur et à mesure les
+        communaut\'es.
+    \item[Retour utilisateurs :] Lors du partage, les utilisateurs
+        peuvent \'emettre un retour potentiellement riche en information.
+        Ce retour doit être simple à effectuer pour l'utilisateur et
+        devra \'egalement être mod\'elis\'e par la suite.
+\end{description}
+
+\section*{TODO}
+\label{sec:TODO}
+
+\begin{description}
+    \item[StreamWide]\hfill
+        \begin{itemize}
+            \item Envoyer le fichier d'installation de l'application Android (iOS ?)
+            \item Extraire les donn\'ees de l'application
+        \end{itemize}
+    \item[T\'el\'ecom]\hfill
+        \begin{itemize}
+            \item Mettre en place une m\'ethode pour simuler des graphes aux
+                propri\'et\'es similaires au graphe d'utilisateurs existant.
+            \item Impl\'ementer une maquette fonctionnant sur un graphe
+                g\'en\'er\'e puis sur les donn\'ees r\'eelles.
+        \end{itemize}
+\end{description}
+
+\end{document}

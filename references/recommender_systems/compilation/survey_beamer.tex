@@ -1,0 +1,235 @@
+\documentclass[11pt,sans]{beamer}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage[]{amsmath}
+\usepackage{amsfonts}
+
+\begin{document}
+\begin{frame}
+        \frametitle{StreamWide}
+
+        \begin{itemize}
+            \item Applications de partage entre utilisateurs
+                \begin{itemize}
+                    \item Chat
+                    \item Photos
+                    \item Vid\'eos ?
+                    \item Musique ?
+                \end{itemize}
+            \item Recommandations portant sur :
+                \begin{itemize}
+                    \item Lieux
+                    \item \'Ev\'enements
+                    \item News
+                    \item Musique ?
+                \end{itemize}
+            \item Recommandations bas\'ees sur :
+                \begin{itemize}
+                    \item Donn\'ees locales/globales ?
+                    \item Informations partag\'ees via applications
+                    \item G\'eolocalisation
+                    \item Retour utilisateur (buzz, proposition, etc.)
+                \end{itemize}
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{M\'ethodes de recommandations}
+        \framesubtitle{Bas\'ee sur le contenu}
+
+        \begin{itemize}
+            \item Principe
+                \begin{itemize}
+                    \item Repr\'esente un contenu (item) dans un espace adapt\'e
+                        pr\'ed\'efini (ex : TF-IDF pour NLP)
+                    \item Regarde historique utilisateur courant
+                    \item Propose contenu \emph{proche} de l'historique
+                \end{itemize}
+            \item Avantages
+                \begin{itemize}
+                    \item Utilise uniquement les donn\'ees locales
+                    \item Simple à impl\'ementer
+                    \item Pas de problème de nouvel objet
+                \end{itemize}
+            \item Inconv\'enients
+                \begin{itemize}
+                    \item Si donn\'ees non denses (peu d'objets
+                        dans l'historique par rapport au nombre total
+                        d'objets), recommandations peu pertinentes
+                    \item N'utilise pas les donn\'ees d'autres utilisateurs
+                    \item Problème du nouvel utilisateur
+                \end{itemize}
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{M\'ethodes de recommandations}
+        \framesubtitle{Collaborative bas\'ee sur la m\'emoire}
+
+        \begin{itemize}
+            \item Principe
+                \begin{itemize}
+                    \item Regarde historique utilisateur courant
+                    \item Cherche utilisateurs avec historique similaire
+                    \item Propose contenu des utilisateurs \emph{proche}
+                \end{itemize}
+            \item Avantages
+                \begin{itemize}
+                    \item S'appuie sur d'autres utilisateurs, donc plus
+                        de donn\'ees
+                    \item Simple à impl\'ementer
+                    \item Pas besoin de mod\'eliser les contenus
+                \end{itemize}
+            \item Inconv\'enients
+                \begin{itemize}
+                    \item Ne peut pas s'appuyer uniquement sur les donn\'ees
+                        locales
+                    \item Problème du nouveau contenu
+                    \item Problème du nouvel utilisateur
+                \end{itemize}
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{M\'ethodes de recommandations}
+        \framesubtitle{Collaborative bas\'ee sur un modèle}
+
+        \begin{itemize}
+            \item Principe
+                \begin{itemize}
+                    \item Mod\'elise le lien entre utilisateurs et objets
+                    \item Regarde l'historique complet pour apprendre les
+                        paramètres du modèle
+                    \item Pr\'edit les pr\'ef\'erences d'un utilisateur à
+                        partir du modèle ainsi appris
+                \end{itemize}
+            \item Avantages
+                \begin{itemize}
+                    \item Utilisation de toutes les donn\'ees disponibles
+                    \item Peut donner une intuition sur les critères de
+                        recommandations
+                    \item Bons r\'esultats de pr\'ediction
+                \end{itemize}
+            \item Inconv\'enients
+                \begin{itemize}
+                    \item Choix du modèle crucial pour bon \'equilibre
+                        qualit\'e/temps d'ex\'ecution
+                    \item Problème du nouveau contenu
+                    \item Problème du nouvel utilisateur
+                \end{itemize}
+        \end{itemize}
+    \end{frame}
+
+    %\begin{frame}
+        %\frametitle{Techniques de recommandations}
+
+        %\begin{itemize}
+            %\item Content-based:
+                %\begin{itemize}
+                    %\item TODO
+                %\end{itemize}
+            %\item Collaborative filtering:
+                %\begin{itemize}
+                    %\item Memory-based:
+                        %\begin{itemize}
+                            %\item Nearest neighbors
+                            %\item Top-N recommendations
+                        %\end{itemize}
+                    %\item Model-based:
+                        %\begin{itemize}
+                            %\item Bayesian beliefs net
+                            %\item Latent semantic
+                            %\item SVD++
+                        %\end{itemize}
+                %\end{itemize}
+            %\item Reinforcement learning??
+        %\end{itemize}
+    %\end{frame}
+
+    %\begin{frame}
+        %\frametitle{Content-based vs CF}
+
+        %M\'ethodes bas\'ees sur le contenu
+        %\begin{itemize}
+            %\item Avantages
+                %\begin{itemize}
+                    %\item Pas de problème de nouvel objet
+                    %\item Simple à impl\'ementer
+                    %\item Ne n\'ecessite pas de donn\'ees d'autres utilisateurs
+                %\end{itemize}
+            %\item Inconv\'enients
+                %\begin{itemize}
+                    %\item N\'ecessite une compr\'ehension \emph{a priori} de
+                        %l'objet
+                    %\item Utilise peu de donn\'ees : repose beaucoup sur la
+                        %repr\'esentation de l'objet
+                %\end{itemize}
+        %\end{itemize}
+
+        %Filtrage collaboratif
+        %\begin{itemize}
+            %\item Avantages
+                %\begin{itemize}
+                    %\item Utilise les informations des autres utilisateurs
+                    %\item Ne n\'ecessite pas de connaissances \emph{a priori}
+                        %des objets
+                %\end{itemize}
+            %\item Inconv\'enients
+                %\begin{itemize}
+                    %\item Problème du nouvel objet
+                %\end{itemize}
+        %\end{itemize}
+    %\end{frame}
+
+    %\begin{frame}[<+->]
+        %\frametitle{Memory-based CF vs model-based CF}
+
+        %Filtrage collaboratif bas\'e sur le pass\'e
+        %\begin{itemize}
+            %\item M
+        %\end{itemize}
+    %\end{frame}
+
+    %\begin{frame}
+        %\frametitle{Collaborative filtering}
+        %\framesubtitle{Memory-based}
+
+        %\begin{itemize}
+            %\item Advantages:
+                %\begin{itemize}
+                    %\item Easy to implement
+                    %\item New data can be added incrementally
+                    %\item Do not need to ``understand'' the nature of the items
+                %\end{itemize}
+            %\item Shortcomings
+                %\begin{itemize}
+                    %\item Dependent on human ratings (in the case of score
+                        %prediction)
+                    %\item New user/item problem
+                    %\item The sparser the worse
+                %\end{itemize}
+        %\end{itemize}
+    %\end{frame}
+
+    %\begin{frame}
+        %\frametitle{Collaborative filtering}
+        %\framesubtitle{Model-based}
+
+        %\begin{itemize}
+            %\item Advantages:
+                %\begin{itemize}
+                    %\item Improved prediction performance
+                    %\item Better scalability
+                    %\item Intuition on recommendations
+                %\end{itemize}
+            %\item Shortcomings
+                %\begin{itemize}
+                    %\item Trade-off between prediction performance and
+                        %scalability
+                    %\item Lost of useful information for dimensionality
+                        %reduction techniques
+                %\end{itemize}
+        %\end{itemize}
+    %\end{frame}
+\end{document}

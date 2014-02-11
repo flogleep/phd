@@ -1,0 +1,15 @@
+"""Spectral algorithm for community detection."""
+
+
+import numpy as np
+import scipy as sp
+import networkx as nx
+import matplotlib.pyplot as plt
+
+
+g = nx.generators.karate_club_graph()
+a = nx.adjacency_matrix(g)
+d = np.diag(nx.degree(g).values())
+e, v = np.linalg.eig(a - d)
+print e
+print v
