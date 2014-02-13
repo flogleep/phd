@@ -5,6 +5,7 @@ import numpy as np
 import networkx as nx
 import matplotlib.pyplot as plt
 from random import choice
+import pdb
 
 
 n_mcmc_iter = 500
@@ -64,19 +65,43 @@ def draw_communities(g, s):
     inner_1 = [e for e in edges if e[0] in nodes_1 and e[1] in nodes_1]
     inner_2 = [e for e in edges if e[0] in nodes_2 and e[1] in nodes_2]
     outter = [e for e in edges if e not in inner_1 and e not in inner_2]
+    deg1 = [i + 5 for i in g.degree(nodes_1).values()]
+    deg2 = [i + 5 for i in g.degree(nodes_2).values()]
 
     pos = nx.spring_layout(g)
-    nx.draw_networkx_nodes(g, pos, nodelist=nodes_1, node_color='r',
-                        node_size=500, alpha=.8)
-    nx.draw_networkx_nodes(g, pos, nodelist=nodes_2, node_color='g',
-                        node_size=500, alpha=.8)
-    nx.draw_networkx_labels(g, pos,
-                            labels={i: str(i + 1) for i in range(len(nodes))})
-    nx.draw_networkx_edges(g, pos, width=1., alpha=.5)
-    nx.draw_networkx_edges(g, pos, edgelist=inner_1, width=4., alpha=.5,
-                        edge_color='r')
-    nx.draw_networkx_edges(g, pos, edgelist=inner_2, width=4., alpha=.5,
-                        edge_color='g')
+    nx.draw_networkx_nodes(g,
+                           pos,
+                           nodelist=nodes_1,
+                           node_color=deg1,
+                           node_size=500,
+                           cmap=plt.cm.Reds,
+                           alpha=.8)
+    nx.draw_networkx_nodes(g,
+                           pos,
+                           nodelist=nodes_2,
+                           node_color=deg2,
+                           node_size=500,
+                           cmap=plt.cm.Greens,
+                           alpha=.8)
+    #nx.draw_networkx_labels(g,
+    #                        pos,
+    #                        labels={i: str(i + 1) for i in range(len(nodes))})
+    nx.draw_networkx_edges(g,
+                           pos,
+                           width=1.,
+                           alpha=.5)
+    nx.draw_networkx_edges(g,
+                           pos,
+                           edgelist=inner_1,
+                           width=4.,
+                           alpha=.5,
+                           edge_color='r')
+    nx.draw_networkx_edges(g,
+                           pos,
+                           edgelist=inner_2,
+                           width=4.,
+                           alpha=.5,
+                           edge_color='g')
     print "---------------------------------------"
     print "#Nodes (red community)         : {0}".format(len(nodes_1))
     print "#Nodes (green community)       : {0}".format(len(nodes_2))
@@ -87,15 +112,29 @@ def draw_communities(g, s):
 
 
 g = nx.generators.karate_club_graph()
-plt.subplot(121)
+#plt.subplot(121)
 plt.axis('off')
 plt.title('Karate Club')
 draw_communities(g, split_communities(g))
 
-test = generate_mcmc(g, n_iter=n_mcmc_iter)
-plt.subplot(122)
-plt.axis('off')
-plt.title('MCMC mix ({0} iterations)'.format(n_mcmc_iter))
-draw_communities(test, split_communities(test))
+#test = generate_mcmc(g, n_iter=n_mcmc_iter)
+#plt.subplot(122)
+#plt.axis('off')
+#plt.title('MCMC mix ({0} iterations)'.format(n_mcmc_iter))
+#draw_communities(test, split_communities(test))
 
 plt.show()
+
+#g = nx.generators.karate_club_graph()
+#plt.axis('off')
+#plt.title('Karate Club')
+#pos = nx.spring_layout(g)
+#deg = g.degree(g.nodes())
+#nx.draw_networkx_nodes(g,
+#                       pos,
+#                       node_list=deg.keys(),
+#                       node_size=300,
+#                       node_color=deg.values(),
+#                       cmap=plt.cm.Blues)
+#nx.draw_networkx_edges(g, pos, width=1., alpha=.5, edge_color='k')
+#plt.show()

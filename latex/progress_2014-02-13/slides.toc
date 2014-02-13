@@ -1,3 +1,4 @@
 \beamer@endinputifotherversion {3.10pt}
 \select@language {french}
 \beamer@sectionintoc {1}{D\IeC {\'e}tection de communaut\IeC {\'e}s}{2}{0}{1}
+\beamer@sectionintoc {2}{G\IeC {\'e}n\IeC {\'e}ration de graphe}{10}{0}{2}
