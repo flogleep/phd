@@ -19,6 +19,44 @@
 
 \begin{document}
 
+\section{Graphes aléatoires}
+\label{sec:graphes_aleatoires}
+
+    \subsection{Loi de Poisson}
+    \label{sub:loi_de_poisson}
+        Cette catégorie de modèle effectue très peu d'hypothèses sur les
+        graphes à générer et permet d'atteindre une grande quantité de graphes
+        d'une taille donnée. Ces modèles possèdent deux paramètres. Le premier
+        paramètre indique le nombre de n\oe{}uds du graphe à générer. Le
+        deuxième paramètre porte sur les arrêtes du graphe ; il n'indique pas
+        nécessairement le nombre d'arrêtes générées mais indique au moins leur
+        probabilité d'occurence.
+
+        \subsubsection{Modèle de Gilbert}
+            Pour $n \in \mathbb{N}^*$ et $0 < p < 1$, le modèle de Gilbert,
+            génère un graphe composé de $n$ n\oe{}uds dont chaque arrête
+            potentielle a une probabilité $p$ d'être présente, indépendamment
+            des autres arrêtes.
+            En général, on choisit $p$ en fonction de $n$ et typiquement
+            $p(n) = o(1)$. \`A noter que dans cette méthode, on ne peut
+            connaître à l'avance le nombre d'arrêtes du graphe généré.
+            Gr\^ace à l'analyse de ce type fournie par \cite{newman2001random},
+            on sait que la probabilité $p_k$ qu'un n\oe{}ud pris au hasard
+            soit de degré $k$ vaut :
+            \[
+                p_k = \binom{|V|}{k} p^k (1 - p)^{N - k}.
+            \]
+            En notant $z = \mathbb{E}\left[|E|\right] = |V|p$, on a le résultat
+            suivant :
+            \[
+                p_k \underset{N \rightarrow +\infty}{\sim}
+                \frac{z^k e^{-z}}{k!},
+            \]
+            ce qui indique que ce modèle tend asymptotiquement vers une
+            distribution des degrés suivant une loi de Poisson.
+
+        \subsubsection{Modèle d'Erdös-Rényi}
+
 \section{Méthodes MCMC}
 \label{sec:methodes_mcmc}
     Soit $G = (V, E)$ un graphe non orienté. Pour $i \in V$, on note $d_i$ le
@@ -33,14 +71,44 @@
         D^{(2)}(n, p) = \frac{|\left\{ (i, j) \in E, (d_i, d_j) = (n, p)
             \text{ ou } (d_i, d_j) = (p, n)\right\}|}{|E|}.
     \]
-    L'objectif des méthodes MCMC pour la génération de graphe est de partir
+    Les méthodes MCMC pour la génération de graphes sont très vastement
+    utilisées (\cite{rao1996markov}). Leur principe général est de partir
     d'un graphe existant et de modifier aléatoirement ses arrêtes, tout en
-    conservant la distribution jointe des degrés initiale. Pour ce faire,
-    cette méthode procède comme indiqué dans l'Algorithme~\ref{alg:mcmc}.
+    conservant certaines propriétés du graphe. L'Algorithme~\ref{alg:mcmc_deg}
+    sélectionne aléatoirement deux arrêtes, puis les échange si cela
+    n'entraine ni la création de boucle ni de double arrête.
+
+    \begin{algorithm}
+        \caption{Algorithme MCMC conservant les degrés des n\oe{}uds.}
+        \label{alg:mcmc_deg}
+        \begin{algorithmic}[1]
+            \Require $V, E, N_{max}$
+            \State $E^{(0)} \gets E$
+            \State $i \gets 1$
+            \While{$i \leq N_{max}$}
+                \State $(e_1, e_2) \gets \text{rand}(E^{(i-1)})$
+                \State $(f_1, f_2) \gets \text{rand}(E^{(i-1)})$
+                \If{no loop and no double edge created}
+                    \State $E^{(i)} \gets E^{(i-1)} \backslash \left\{ (e_1, e_2), (f_1, f_2) \right\}$
+                    \State $E^{(i)} \gets E^{(i)} \cup \left\{ (e_1, f_2), (f_1, e_2) \right\}$
+                \Else
+                    \State $E^{(i)} \gets E^{(i-1)}$
+                \EndIf
+                \State $i \gets i + 1$
+            \EndWhile
+        \end{algorithmic}
+    \end{algorithm}
+
+    Cet algorithme est simple à implémenter et ne nécessite qu'un paramètre :
+    le nombre d'itérations $N_{max}$. En général, on choisit $N_{max}$ de
+    l'ordre de $100 \times |E|$ pour s'assurer un graphe généré indépendant de
+    l'original. Cependant, ce choix est purement expérimental et il existe peu
+    de travaux théoriques sur ces critères ; \cite{ray2012we} présente
+    toutefois des résultats intéressants sur des critères d'arrêts spécifiques.
 
     \begin{algorithm}
         \caption{Algorithme MCMC pour la génération de graphe.}
-        \label{alg:mcmc}
+        \label{alg:mcmc_joint}
         \begin{algorithmic}
             \Require $V, E, N_{max}$
             \State $E^{(0)} \gets E$
@@ -52,9 +120,12 @@
             \State $E^{(i)} \gets E^{(i)} \cup \left\{ (e_1, f_2), (f_1, e_2) \right\}$
             \State $i \gets i + 1$
             \EndWhile \\
-            \Return $(V, E^{(N_{max})})
+            \Return $(V, E^{(N_{max})})$
         \end{algorithmic}
     \end{algorithm}
+
+    \bibliographystyle{alpha}
+    \bibliography{network}
 
 \end{document}
 

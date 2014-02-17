@@ -1,0 +1,76 @@
+\documentclass[c]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+
+\usetheme{Warsaw}
+
+\title{Blah}
+\author{Igor Colin}
+\date{\today}
+
+\setbeamertemplate{navigation symbols}{}
+
+\AtBeginSection[]
+{
+    \begin{frame}<beamer>
+        \tableofcontents[currentsection]
+    \end{frame}
+}
+
+\begin{document}
+
+\maketitle
+
+\section{Données à disposition}
+\begin{frame}
+    \begin{itemize}
+        \item Données de départs : graphe utilisateurs
+        \item N\oe{}uds : utilisateurs
+        \item Arrêtes : relations d'amitié, influence, fréquence de partage
+
+    \end{itemize}
+\end{frame}
+
+\section{Génération dynamique de graphe}
+\begin{frame}
+    \begin{itemize}
+        \item Graphe d'utilisateurs dynamique
+        \begin{itemize}
+            \item Nouveaux utilisateurs, départ d'utilisateurs
+            \item Nouvelles connexions entre utilisateurs, disparition de
+                connexions
+            \item Évolution des connexions existantes (influence dynamique)
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \begin{itemize}
+        \item Objectif : prédire l'évolution du graphe
+        \item Définir un modèle d'évolution dynamique
+        \item Utiliser l'historique des évolutions pour retrouver
+            les paramètres du modèle
+        \item Mettre à jour ces paramètres en ligne ou à intervalle fixé
+    \end{itemize}
+\end{frame}
+
+\section{Renforcement}
+\begin{frame}
+    \begin{itemize}
+        \item Possibilité d'interagir avec l'utilisateur via des suggestions
+        \item Comment maximiser l'impact de ces suggestions ?
+        \item Processus de décision markovien :
+        \begin{itemize}
+            \item Ensemble d'états (connexions du graphe, satisfaction
+                utilisateur)
+            \item Ensemble de décisions possibles (suggestions)
+            \item Déduction d'un politique optimale
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\end{document}

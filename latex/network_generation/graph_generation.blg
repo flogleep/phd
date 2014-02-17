@@ -1,0 +1,45 @@
+This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+The top-level auxiliary file: graph_generation.aux
+The style file: alpha.bst
+Database file #1: network.bib
+You've used 3 entries,
+            2543 wiz_defined-function locations,
+            580 strings with 5067 characters,
+and the built_in function-call counts, 1594 in all, are:
+= -- 165
+> -- 75
+< -- 2
++ -- 28
+- -- 27
+* -- 113
+:= -- 256
+add.period$ -- 10
+call.type$ -- 3
+change.case$ -- 21
+chr.to.int$ -- 3
+cite$ -- 3
+duplicate$ -- 64
+empty$ -- 109
+format.name$ -- 30
+if$ -- 337
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 3
+newline$ -- 18
+num.names$ -- 9
+pop$ -- 19
+preamble$ -- 1
+purify$ -- 24
+quote$ -- 0
+skip$ -- 59
+stack$ -- 0
+substring$ -- 104
+swap$ -- 21
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 24
+warning$ -- 0
+while$ -- 16
+width$ -- 5
+write$ -- 42

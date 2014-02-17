@@ -1,0 +1,23 @@
+\begin{thebibliography}{NSW01}
+
+\bibitem[NSW01]{newman2001random}
+Mark~EJ Newman, Steven~H Strogatz, and Duncan~J Watts.
+\newblock Random graphs with arbitrary degree distributions and their
+  applications.
+\newblock {\em Physical Review E}, 64(2):026118, 2001.
+
+\bibitem[RJB96]{rao1996markov}
+A~Ramachandra Rao, Rabindranath Jana, and Suraj Bandyopadhyay.
+\newblock A markov chain monte carlo method for generating random (0,
+  1)-matrices with given marginals.
+\newblock {\em Sankhy{\=a}: The Indian Journal of Statistics, Series A}, pages
+  225--242, 1996.
+
+\bibitem[RPS12]{ray2012we}
+Jaideep Ray, Ali Pinar, and C~Seshadhri.
+\newblock Are we there yet? when to stop a markov chain while generating random
+  graphs.
+\newblock In {\em Algorithms and Models for the Web Graph}, pages 153--164.
+  Springer, 2012.
+
+\end{thebibliography}

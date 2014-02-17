@@ -89,8 +89,6 @@
         \]
     \end{deffr}
 
-Remarque : $Q(V, \emptyset) = 0$
-
 \end{frame}
 
 \begin{frame}
@@ -107,8 +105,9 @@ Remarque : $Q(V, \emptyset) = 0$
 
     \begin{theofr}
         Soit $G = (V, E)$ un graphe non-orienté. Soit $\mathbf{u^{(2)}}$ le vecteur
-        propre associé à la deuxième plus grande valeur propre de la matrice de
-        Laplace normalisée. Alors la partition $(S, T)$ définie par :
+        propre associé à la deuxième plus grande valeur propre $\lambda^{(2)}$
+        de la matrice de Laplace normalisée. Si $\lambda^{(2)} > 0$, alors la
+        partition $(S, T)$ définie par :
         \[
             \left\{
                 \begin{array}{r c l}
@@ -135,7 +134,9 @@ Remarque : $Q(V, \emptyset) = 0$
     \begin{itemize}
         \item Méthode simple à implémenter
         \item Critère interprétable
-        \item Limites : coût en $\mathcal{O} (|V|^3)$
+        \item Condition d'arrêt
+        \item Limites : coût en $\mathcal{O} (|V|^3)$, matrice de Laplace de
+            taille $|V| \times |V|$
         \item Nécessité d'utiliser une méthode adaptée pour de grands réseaux
     \end{itemize}
 \end{frame}

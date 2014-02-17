@@ -1,0 +1,5 @@
+\beamer@endinputifotherversion {3.10pt}
+\select@language {french}
+\beamer@sectionintoc {1}{Donn\IeC {\'e}es \IeC {\`a} disposition}{2}{0}{1}
+\beamer@sectionintoc {2}{G\IeC {\'e}n\IeC {\'e}ration dynamique de graphe}{4}{0}{2}
+\beamer@sectionintoc {3}{Renforcement}{7}{0}{3}
