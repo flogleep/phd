@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.10.9)  18 FEB 2014 07:36
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.10.9)  18 FEB 2014 07:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1187,9 +1187,9 @@ File: ./figures/karate_club_split.png Graphic file (type png)
 <use ./figures/karate_club_split.png>
 Package pdftex.def Info: ./figures/karate_club_split.png used on input line 171
 .
-(pdftex.def)             Requested size: 245.83282pt x 190.81491pt.
+(pdftex.def)             Requested size: 215.10196pt x 166.96304pt.
 
-Overfull \vbox (31.71684pt too high) detected at line 171
+Overfull \vbox (7.86497pt too high) detected at line 171
  []
 
 [14
@@ -1280,11 +1280,11 @@ Package pdftex.def Info: ./figures/tree.png used on input line 270.
 \tf@snm=\write8
 \openout8 = `slides.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 302.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 302.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 303.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 303.
  (./slides.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 302.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 302.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 303.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 303.
 Package rerunfilecheck Info: File `slides.out' has not changed.
 (rerunfilecheck)             Checksum: 1901EA0D788EE591EADC5EBD5DED32D1;198.
 
@@ -1292,7 +1292,7 @@ Package rerunfilecheck Info: File `slides.out' has not changed.
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.0pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 302.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 303.
  ) 
 Here is how much of TeX's memory you used:
  16639 strings out of 495059
@@ -1315,7 +1315,7 @@ sfonts/cm/cmssi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmssi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmssi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on slides.pdf (28 pages, 492461 bytes).
+Output written on slides.pdf (28 pages, 492502 bytes).
 PDF statistics:
  404 PDF objects out of 1000 (max. 8388607)
  325 compressed objects within 4 object streams

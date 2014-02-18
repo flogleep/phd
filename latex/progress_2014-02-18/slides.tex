@@ -41,8 +41,8 @@
                 \item<3-> Arrêtes :
                     \begin{itemize}
                         \item<3-> relations d'amitié
-                        \item<4-> influence
-                        \item<5-> fréquence de partage
+                        \item<4-> influences
+                        \item<5-> fréquences de partage
                     \end{itemize}
             \end{itemize}
         \end{column}
@@ -107,7 +107,7 @@
             l'on avait distribué les arrêtes du graphe aléatoirement.
         \end{deffr}
 
-        \item Définition de la modularité dépendantes de l'aléa autorisé sur
+        \item Définition de la modularité dépendante de l'aléa autorisé sur
         les arrêtes
         \item Approche usuelle : degrés des n\oe{}uds conservés
     \end{itemize}
@@ -164,7 +164,7 @@
 \begin{frame}
     \frametitle{Approche spectrale}
     \begin{figure}
-        \includegraphics[width=.8\textwidth]{./figures/karate_club_split.png}
+        \includegraphics[width=.7\textwidth]{./figures/karate_club_split.png}
         \caption{Détection de communauté appliquée au club de karaté de
         Zachary.}
     \end{figure}
@@ -230,7 +230,7 @@
 \end{frame}
 
 \begin{frame}
-        Peu de modèles existants sur graphes dynamique :
+        Peu de modèles existants sur graphes dynamiques :
         \begin{itemize}
             \item Épidémiologie (théorie de la survie)
             \item Génétique (détection de \emph{pattern})
@@ -242,7 +242,7 @@
     \frametitle{\emph{Community Guided Attachment}}
 
     \begin{itemize}
-        \item Observations sur des graphes réels (réseaux sociaux, informatiques)
+        \item Observation sur des graphes réels (réseaux sociaux, informatiques)
         \begin{itemize}
             \item Le degré moyen augmente quand le réseau grandit : $|E_t|
                 \propto |V_t|^{\alpha}$, avec $1 < \alpha < 2$
@@ -284,6 +284,7 @@
         \item CGA donne une interprétation réaliste à un phénomène observé
         \item Mais ne se penche sur un seul aspect : pas d'effet \emph{small
             world}, pas de créations d'arrêtes parmi n\oe{}uds existants, etc.
+        \item Pas de modélisation temporelle
         \item Nécessité de mixer les modèles
     \end{itemize}
 \end{frame}
@@ -295,7 +296,7 @@
         \item Définir un modèle d'évolution dynamique
         \item Utiliser l'historique des évolutions pour retrouver
             les paramètres du modèle
-        \item Mettre à jour ces paramètres en ligne ou à intervalle fixé
+        \item Mettre à jour ces paramètres en ligne ou à intervalles déterminés
     \end{itemize}
 \end{frame}
 
