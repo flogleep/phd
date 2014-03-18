@@ -107,8 +107,9 @@
                         \item réel
                         \item efficace
                     \end{itemize}
-                \item<3-> Conductance / expansion
-                \item<4-> Matrice d'adjacence, matrice laplacienne
+                \item<3-> Condutance / expansion
+                \item<4-> Modularité
+                \item<5-> Matrice laplacienne
             \end{itemize}
         \end{column}
         \begin{column}{.4\textwidth}
@@ -133,81 +134,50 @@
     \frametitle{Génération de graphes}
 
     \begin{itemize}
-        \item<1-> Objectif : pouvoir générer des graphes aux propriétés similaires
-        \item<2-> Méthodes
+        \item Objectif : pouvoir générer des graphes aux propriétés similaires
+        \item Méthodes
             \begin{itemize}
                 \item Attachement préférentiel (Newman), Fitness model : 
                     \begin{itemize}
                         \item lorsqu'un réseau grandit, les nouveaux n\oe{}uds
                             ne se connectent pas aléatoirement
-                        \item ils se connectent aux n\oe{}uds les plus attirants
+                        \item ils se connectent aux n\oe{}uds plus \og{}attirants \fg
                     \end{itemize}
-                \item Kronecker (Leskovec)
+                \item \textit{Forest Fire}, Kronecker (Leskovec 2005, 2007)
             \end{itemize}
-        \item<3-> Optimiser les paramètres des modèles pour obtenir des graphes
-            aux propriétés similaires.
     \end{itemize}
 \end{frame}
 
 \begin{frame}
     \frametitle{Détection de communautés}
 
-    \begin{columns}
-        \begin{column}{.7\textwidth}
-            \begin{itemize}
-                \item<1-> Idée :
-                    \begin{itemize}
-                        \item Un graphe peu contenir des sous-graphes très connectés
-                        \item Deux utilisateurs d'un même sous-graphe peuvent avoir un profil
-                            similaire
-                    \end{itemize}
-                \item<2-> Méthode :
-                    \begin{itemize}
-                        \item Sélection d'un critère de qualité de partionnement (modularité)
-                        \item Sélection des deux sous-graphes maximisant le critère
-                        \item Itération sur les sous-graphes jusqu'à ce que le critère n'augmente plus
-                    \end{itemize}
-                \item<3-> Graphe \textit{monolabel} (Newman 2006)
-                \item<4-> Graphe \textit{multilabel} (Lelarge, Massoulié, Xu 2013)
-            \end{itemize}
-        \end{column}
-        \begin{column}{.3\textwidth}
-            \begin{figure}
-                \includegraphics[width=.9\textwidth]{./figures/detection_communaute.png}
-            \end{figure}
-        \end{column}
-    \end{columns}
+    \begin{itemize}
+        \item Un graphe peu contenir des sous-graphes très connectés
+        \item 2 utilisateurs d'un même sous-graphe peuvent avoir un profil
+            similaire
+    \end{itemize}
 \end{frame}
 
 \begin{frame}
     \frametitle{Propagation de l'information}
 
     \begin{itemize}
-        \item<1-> Détection de communauté : structure du graphe
-        \item<2-> Modéliser la propagation de l'information
+        \item Détection de communauté : structure du graphe
+        \item Modéliser la propagation de l'information
             \begin{itemize}
                 \item Théorie de la survie
-                \item Influences dans un réseau, théorie de la percolation
+                \item Influences dans un réseau (Kempe et al 2003)
             \end{itemize}
     \end{itemize}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Autres problèmes}
+    \frametitle{Statique vs dynamique}
 
     \begin{itemize}
-        \item<1-> Statique vs dynamique :
-            \begin{itemize}
-                \item Beaucoup de modèles/méthodes basées sur des graphes statiques
-                \item En réalité, $G(t) = (V(t), E(t))$
-                \item Nécessité de méthodes adaptées (online)
-            \end{itemize}
-        \item<2-> Parcimonie des recommandations :
-            \begin{itemize}
-                \item Beaucoup de possibilités de recommandations
-                \item Ne pas submerger de recommandations
-                \item Introduction d'une pénalité
-            \end{itemize}
+        \item Beaucoup de modèles/méthodes basées sur des graphes statiques
+        \item En réalité, $G(t) = (V(t), E(t))$
+        \item Nécessité de méthodes adaptées (online)
     \end{itemize}
 \end{frame}
 
