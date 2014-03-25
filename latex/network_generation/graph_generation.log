@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=latex 2013.10.28)  18 MAR 2014 11:40
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=latex 2013.10.28)  25 MAR 2014 12:56
 entering extended mode
  file:line:error style messages enabled.
  %&-line parsing enabled.
@@ -377,54 +377,97 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 )
 \@float@every@algorithm=\toks25
 \c@algorithm=\count110
-) (./graph_generation.aux)
+)
+(/usr/share/texmf-texlive/tex/latex/graphics/color.sty
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+
+(/etc/texmf/tex/latex/config/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: dvips.def on input line 130.
+
+(/usr/share/texmf-texlive/tex/latex/graphics/dvips.def
+File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
+)
+(/usr/share/texmf-texlive/tex/latex/graphics/dvipsnam.def
+File: dvipsnam.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
+))
+(/usr/share/texmf-texlive/tex/latex/ltxmisc/framed.sty
+Package: framed 2007/10/04 v 0.95: framed or shaded text with page breaks
+\fb@frw=\dimen115
+\fb@frh=\dimen116
+\FrameRule=\dimen117
+\FrameSep=\dimen118
+)
+(/usr/share/texmf-texlive/tex/latex/comment/comment.sty
+\CommentStream=\write3
+
+Excluding comment 'comment') Special comment 'todo' (./graph_generation.aux)
 \openout1 = `graph_generation.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Info: Redefining \degres on input line 23.
-LaTeX Info: Redefining \dots on input line 23.
-LaTeX Info: Redefining \up on input line 23.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Info: Redefining \degres on input line 30.
+LaTeX Info: Redefining \dots on input line 30.
+LaTeX Info: Redefining \up on input line 30.
 
 
 Package frenchb.ldf Warning: OT1 encoding should not be used for French. 
 (frenchb.ldf)                Add \usepackage[T1]{fontenc} to the preamble
-(frenchb.ldf)                of your document, on input line 23.
+(frenchb.ldf)                of your document, on input line 30.
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 28.
+LaTeX Font Info:    Try loading font information for U+msa on input line 35.
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 28.
+LaTeX Font Info:    Try loading font information for U+msb on input line 35.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
-) [1
+)
+\openout3 = `comment.cut'.
 
-]
-Overfull \hbox (19.81389pt too wide) in paragraph at lines 138--145
+ [1
+
+] (./comment.cut)
+\openout3 = `comment.cut'.
+
+
+(./comment.cut)
+Overfull \hbox (19.81389pt too wide) in paragraph at lines 166--173
 \OT1/cmr/m/n/10 arr^etes, tout en con-ser-vant cer-taines pro-pri^^Set^^Ses du 
 graphe. L'Al-go-rithme 2[] s^^Selectionne
  []
 
-[2] (./graph_generation.bbl) [3] (./graph_generation.aux) ) 
-Here is how much of TeX's memory you used:
- 2451 strings out of 495062
- 30585 string characters out of 1182643
- 92389 words of memory out of 3000000
- 5618 multiletter control sequences out of 15000+50000
- 7971 words of font info for 31 fonts, out of 3000000 for 9000
- 28 hyphenation exceptions out of 8191
- 27i,12n,24p,284b,368s stack positions out of 5000i,500n,10000p,200000b,50000s
+[2]
+\openout3 = `comment.cut'.
 
-Output written on graph_generation.dvi (3 pages, 11216 bytes).
+ (./comment.cut) [3] [4]
+Overfull \hbox (1.47266pt too wide) in paragraph at lines 312--318
+[]\OT1/cmr/m/n/10 Ce mod^^Rele d^^Sevelopp^^Se dans [[]] cherche de nou-veau ^^
+Ra re-specter les crit^^Reres
+ []
+
+\openout3 = `comment.cut'.
+
+(./comment.cut) (./graph_generation.bbl [5]) [6] (./graph_generation.aux) ) 
+Here is how much of TeX's memory you used:
+ 2833 strings out of 495062
+ 36208 string characters out of 1182643
+ 98174 words of memory out of 3000000
+ 5969 multiletter control sequences out of 15000+50000
+ 8590 words of font info for 33 fonts, out of 3000000 for 9000
+ 28 hyphenation exceptions out of 8191
+ 27i,12n,24p,284b,379s stack positions out of 5000i,500n,10000p,200000b,50000s
+
+Output written on graph_generation.dvi (6 pages, 24200 bytes).
