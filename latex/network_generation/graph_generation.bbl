@@ -1,5 +1,11 @@
 \begin{thebibliography}{LCKF05}
 
+\bibitem[BGZ07]{blei2007statistical}
+Edoardo Airoldi David~M Blei, Stephen E Fienberg~Anna Goldenberg, and Eric P
+  Xing Alice~X Zheng.
+\newblock Statistical network analysis: Models, issues, and new directions.
+\newblock 2007.
+
 \bibitem[CCGJ02]{chen2002origin}
 Qian Chen, Hyunseok Chang, Ramesh Govindan, and Sugih Jamin.
 \newblock The origin of power laws in internet topologies revisited.
@@ -14,7 +20,7 @@ Paul Erd{\H{o}}s and Alfr{\'e}d R{\'e}nyi.
   1960.
 
 \bibitem[LCKF05]{leskovec2005realistic}
-Jurij Leskovec, Deepayan Chakrabarti, Jon Kleinberg, and Christos Faloutsos.
+Jure Leskovec, Deepayan Chakrabarti, Jon Kleinberg, and Christos Faloutsos.
 \newblock Realistic, mathematically tractable graph generation and evolution,
   using kronecker multiplication.
 \newblock In {\em Knowledge Discovery in Databases: PKDD 2005}, pages 133--145.

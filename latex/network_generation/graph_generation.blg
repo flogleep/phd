@@ -2,44 +2,46 @@ This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
 The top-level auxiliary file: graph_generation.aux
 The style file: alpha.bst
 Database file #1: network.bib
-You've used 7 entries,
+Warning--empty journal in blei2007statistical
+You've used 8 entries,
             2543 wiz_defined-function locations,
-            609 strings with 6002 characters,
-and the built_in function-call counts, 3625 in all, are:
-= -- 378
-> -- 181
+            612 strings with 6184 characters,
+and the built_in function-call counts, 3985 in all, are:
+= -- 412
+> -- 206
 < -- 5
-+ -- 68
-- -- 66
-* -- 261
-:= -- 579
-add.period$ -- 24
-call.type$ -- 7
-change.case$ -- 50
-chr.to.int$ -- 7
-cite$ -- 7
-duplicate$ -- 144
-empty$ -- 245
-format.name$ -- 73
-if$ -- 764
++ -- 77
+- -- 75
+* -- 286
+:= -- 644
+add.period$ -- 27
+call.type$ -- 8
+change.case$ -- 57
+chr.to.int$ -- 8
+cite$ -- 9
+duplicate$ -- 157
+empty$ -- 265
+format.name$ -- 83
+if$ -- 832
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 7
-newline$ -- 38
-num.names$ -- 21
-pop$ -- 45
+missing$ -- 8
+newline$ -- 43
+num.names$ -- 24
+pop$ -- 53
 preamble$ -- 1
-purify$ -- 57
+purify$ -- 65
 quote$ -- 0
-skip$ -- 131
+skip$ -- 143
 stack$ -- 0
-substring$ -- 216
+substring$ -- 223
 swap$ -- 45
 text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 56
-warning$ -- 0
-while$ -- 36
-width$ -- 10
-write$ -- 97
+type$ -- 64
+warning$ -- 1
+while$ -- 39
+width$ -- 11
+write$ -- 108
+(There was 1 warning)

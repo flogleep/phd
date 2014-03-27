@@ -122,43 +122,40 @@ Ajout laplacien et modularité
 \section{Graphes aléatoires}
 \label{sec:graphes_aleatoires}
 
-    \subsection{Loi de Poisson}
-    \label{sub:loi_de_poisson}
-        Cette catégorie de modèle effectue très peu d'hypothèses sur les
-        graphes à générer et permet d'atteindre une grande quantité de graphes
-        d'une taille donnée. Ces modèles possèdent deux paramètres. Le premier
-        paramètre indique le nombre de n\oe{}uds du graphe à générer. Le
-        deuxième paramètre porte sur les arrêtes du graphe ; il n'indique pas
-        nécessairement le nombre d'arrêtes générées mais indique au moins leur
-        probabilité d'occurence.
+    \subsection{Modèle de Erdös-Rényi-Gilbert}
+    \label{sub:modele_erdos}
+    Cette catégorie de modèle, introduite dans \cite{erdHos1960evolution},
+    effectue très peu d'hypothèses sur les graphes à générer et permet
+    d'atteindre une grande quantité de graphes d'une taille donnée. Ces modèles
+    possèdent deux paramètres. Le premier paramètre indique le nombre de
+    n\oe{}uds du graphe à générer. Le deuxième paramètre porte sur les arrêtes
+    du graphe ; il n'indique pas nécessairement le nombre d'arrêtes générées
+    mais indique au moins leur probabilité d'occurence.
 
-        \subsubsection{Modèle de Gilbert}
-            Pour $n \in \mathbb{N}^*$ et $0 < p < 1$, le modèle de Gilbert,
-            génère un graphe composé de $n$ n\oe{}uds dont chaque arrête
-            potentielle a une probabilité $p$ d'être présente, indépendamment
-            des autres arrêtes.
-            En général, on choisit $p$ en fonction de $n$ et typiquement
-            $p(n) = o(1)$. \`A noter que dans cette méthode, on ne peut
-            connaître à l'avance le nombre d'arrêtes du graphe généré.
-            Gr\^ace à l'analyse de ce type fournie par \cite{newman2001random},
-            on sait que la probabilité $p_k$ qu'un n\oe{}ud pris au hasard
-            soit de degré $k$ vaut :
-            \[
-                p_k = \binom{|V|}{k} p^k (1 - p)^{N - k}.
-            \]
-            En notant $z = \mathbb{E}\left[|E|\right] = |V|p$, on a le résultat
-            suivant :
-            \[
-                p_k \underset{N \rightarrow +\infty}{\sim}
-                \frac{z^k e^{-z}}{k!},
-            \]
-            ce qui indique que ce modèle tend asymptotiquement vers une
-            distribution des degrés suivant une loi de Poisson.
-
-        \subsubsection{Modèle d'Erdös-Rényi}
+    Pour $n \in \mathbb{N}^*$ et $0 < p < 1$, le modèle de Gilbert,
+    génère un graphe composé de $n$ n\oe{}uds dont chaque arrête
+    potentielle a une probabilité $p$ d'être présente, indépendamment
+    des autres arrêtes.
+    En général, on choisit $p$ en fonction de $n$ et typiquement
+    $p(n) = o(1)$. \`A noter que dans cette méthode, on ne peut
+    connaître à l'avance le nombre d'arrêtes du graphe généré.
+    Gr\^ace à l'analyse de ce type fournie par \cite{newman2001random},
+    on sait que la probabilité $p_k$ qu'un n\oe{}ud pris au hasard
+    soit de degré $k$ vaut :
+    \[
+        p_k = \binom{|V|}{k} p^k (1 - p)^{N - k}.
+    \]
+    En notant $z = \mathbb{E}\left[|E|\right] = |V|p$, on a le résultat
+    suivant :
+    \[
+        p_k \underset{N \rightarrow +\infty}{\sim}
+        \frac{z^k e^{-z}}{k!},
+    \]
+    ce qui indique que ce modèle tend asymptotiquement vers une
+    distribution des degrés suivant une loi de Poisson.
 
 \begin{todo}
-ajouter description de \cite{erdHos1960evolution}
+Ajout description de modèles $p_1$, $p_2$
 \end{todo}
 
 \section{Méthodes MCMC}
@@ -246,7 +243,9 @@ Ajouter description des résultats théoriques sur les critères d'arrêt
                 brevets.
             \item un petit diamètre. Le diamètre effectif d'un réseau social
                 est souvent faible, de l'ordre de la dizaine.
-            \item~[regarder les plots de valeurs singulières/propres]
+\begin{todo}
+Regarder les plots de valeurs singulières/propres
+\end{todo}
         \end{itemize}
         Un certain nombre de propriétés liées à l'évolution du réseau ont
         également été observées :
@@ -288,25 +287,27 @@ Ajouter description des résultats théoriques sur les critères d'arrêt
     d'utiliser le produit de Kronecker pour générer une suite croissante de
     graphes $\big(G_i = (V_i, E_i)\big)_{0 \leq i \leq N}$ respectant les
     conditions souhaitées. Pour cela, on considère les matrices d'adjacence
-    respectives $(A_i)_{0 \leq i \leq N}$ des $(G_i)_{0 \leq i \leq N}$. On
-    définit la suite des $(A_i)_{0 \leq i \leq N}$ par la relation de
+    respectives $(A^{(i)})_{0 \leq i \leq N}$ des $(G_i)_{0 \leq i \leq N}$. On
+    définit la suite des $(A^{(i)})_{0 \leq i \leq N}$ par la relation de
     récurrence:
     \[
-        A_{i+1} = A_i^{\otimes 2}.
+        A^{(i+1)} = \big(A^{(i)}\big)^{\otimes 2}.
     \]
     On obtient bien une suite de graphes croissante en taille et on peut
     montrer que les propriétés souhaitées sont respectées. Afin d'introduire
     de l'aléatoire dans la génération de ces graphes, au lieu de considérer la
-    matrice d'adjacence, on considère une matrice $\tilde{A}_0$ à coefficients
-    dans $[0, 1]$ puis on génère la suite $\left( \tilde{A}_i \right)_{0 \leq i \leq N}$
-    par la même relation de récurrence. On obtient ainsi une suite de matrices
-    à coefficients dans $[0, 1]$, qui vont représenter la probabilité
-    d'occurence d'une arrête. Ainsi, si pour $0 \leq i \leq N$,
+    matrice d'adjacence, on considère une matrice $\tilde{A}^{(0)}$ à
+    coefficients dans $[0, 1]$ puis on génère la suite
+    $\left( \tilde{A}^{(i)} \right)_{0 \leq i \leq N}$ par la même relation de
+    récurrence. On obtient ainsi une suite de matrices à coefficients dans
+    $[0, 1]$, qui vont représenter la probabilité d'occurence d'une arrête.
+    Ainsi, si pour $0 \leq i \leq N$,
     \[
-        \mathbb{P}\left( A_i[j,k] = 1 \right) = \tilde{A}_i[j, k].
+        \mathbb{P}\left( A^{(i)}_{j,k} = 1 \right) = \tilde{A}^{(i)}_{j, k}.
     \]
-
+\begin{todo}
 Discussion KronGen $\rightarrow$ quelle distance pour comparer des graphes ?
+\end{todo}
 
     \subsubsection{Modèle d'attachement par communautés}
     Ce modèle développé dans \cite{Leskovec:2007:GED:1217299.1217301} cherche
@@ -326,12 +327,71 @@ Discussion KronGen $\rightarrow$ quelle distance pour comparer des graphes ?
     de l'arbre seront les n\oe{}uds du graphe. Il n'est pas nécessaire que
     l'arbre soit homogène pour appliquer cette méthode ; cependant, les
     démonstrations sont effectuées dans le cas homogène afin de simplifier
-    les raisonnements
+    les raisonnements.
 \begin{todo}
 Check si démontrable pour le cas non-homogène
 \end{todo}
+    Soit $T$ un arbre représentant la structure des communautés du graphe $G_0$.
+    On définit la distance $d_T$ entre deux éléments de l'arbre comme étant la
+    longueur du chemin entre les deux éléments. Le graphe de départ $G_0$ peut
+    soit déjà contenir des éléments qui auront servir à établir la structure
+    des communautés, soit être vide -- auquel cas la structure aura été
+    imposée au préalable.
+    On place ensuite les n\oe{}uds du graphe dans l'arbre $T$ : ces derniers
+    seront les feuilles de l'arbre, rattachés à la plus petite communauté les
+    contenant.
+\begin{todo}
+Ajouter schéma, clarifier explication
+\end{todo}
+    \'A chaque itération, un nouveau n\oe{}ud $n$ arrive dans le réseau. Ce
+    n\oe{}ud est assigné à une communauté et inséré dans l'arbre $T$ comme
+    précédemment. Ensuite, on relie aléatoirement le nouveau n\oe{}ud à ceux
+    déjà présents avec la distribution de probabilité suivante :
+    \[
+        \mathbb{P}\left((n, i) \in E  \right) = c^{-d_T(n, i)} \text{, pour } i \in V,
+    \]
+    où $c$ représente la difficulté pour un utilisateur de se connecter à un
+    autre.
 
-    \bibliographystyle{alpha}
-    \bibliography{network}
+    Cette méthode est relativement intuitive (des individus se tournent plus
+    facilement vers des individus de mêmes centres d'intérêts) et permet de
+    vérifier une partie des conditions de la Section~\ref{sub:proprietes_cles}
+    si $c$ est contenu dans un certain intervalle, dépendant du nombre de
+    sous-communautés dans chaque communauté de l'arbre.
+\begin{todo}
+Ajouter version dynamique de l'attachement par communautés
+\end{todo}
+
+    \subsubsection{Modèle de feu de forêt}
+
+    \section{Modèles dynamiques}
+    \label{sec:modeles_dynamiques}
+    Les modèles précédents permettent de générer des graphes d'une taille
+    donnée soit en créant tout le graphe en une fois, soit en faisant grossir
+    petit à petit le graphe jusqu'à atteindre la taille souhaitée. Même si
+    des contraintes ont parfois été imposées sur la manière dans le graphe
+    pouvait grossir, il n'y avait pas là de véritable modélisation de la
+    dynamique d'un graphe, qui concerne autant l'ajout ou la suppression de
+    n\oe{}uds que les modifications des arrêtes.
+
+    \subsection{Chaînes de Markov en temps discret}
+    \label{sub:markov_discret}
+    Un première approche pour modéliser l'évolution temporelle d'un réseau est
+    de considérer des chaînes de Markov. Dans \cite{blei2007statistical},
+    l'approche en temps discret est retenue et on considère une probabilité de
+    transition de la forme :
+    \[
+        \mathbb{P}(E_t | E_{t-1}) \propto \exp \left( \sum_k \alpha_k s_k(E_t, E_{t-1} \right),
+    \]
+    où les $(s_k)_k$ sont des statistiques du réseau pondérées par les $(\alpha_k)_k$.
+    Les statistiques sont typiquement :
+    \begin{description}
+        \item[Densité des arrêtes :] $s(E_t, E_{t-1}) = \frac{\card{E_t}}{n-1}$
+        \item[Stabilité :] $s(E_t, E_{t-1}) = \frac{\card{E_t \cap E_{t-1}} + \card{E_t^c \cap E_{t-1}^c}}{n-1}$
+        \item[Réciprocité :] 
+    \end{description}
+
+\bibliographystyle{alpha}
+\bibliography{network}
 
 \end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=latex 2013.10.28)  25 MAR 2014 12:56
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=latex 2013.10.28)  27 MAR 2014 12:01
 entering extended mode
  file:line:error style messages enabled.
  %&-line parsing enabled.
@@ -444,7 +444,7 @@ File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 
 
 (./comment.cut)
-Overfull \hbox (19.81389pt too wide) in paragraph at lines 166--173
+Overfull \hbox (19.81389pt too wide) in paragraph at lines 163--170
 \OT1/cmr/m/n/10 arr^etes, tout en con-ser-vant cer-taines pro-pri^^Set^^Ses du 
 graphe. L'Al-go-rithme 2[] s^^Selectionne
  []
@@ -452,22 +452,46 @@ graphe. L'Al-go-rithme 2[] s^^Selectionne
 [2]
 \openout3 = `comment.cut'.
 
- (./comment.cut) [3] [4]
-Overfull \hbox (1.47266pt too wide) in paragraph at lines 312--318
+ (./comment.cut) [3]
+\openout3 = `comment.cut'.
+
+ (./comment.cut) [4]
+\openout3 = `comment.cut'.
+
+ (./comment.cut)
+Underfull \hbox (badness 2065) in paragraph at lines 1--310
+[]\OT1/cmr/bx/n/10 Discussion Kro-n-Gen $\OMS/cmsy/m/n/10 !$ \OT1/cmr/bx/n/10 q
+uelle dis-tance pour com-parer des
+ []
+
+
+Overfull \hbox (1.47266pt too wide) in paragraph at lines 313--319
 []\OT1/cmr/m/n/10 Ce mod^^Rele d^^Sevelopp^^Se dans [[]] cherche de nou-veau ^^
 Ra re-specter les crit^^Reres
  []
 
 \openout3 = `comment.cut'.
 
-(./comment.cut) (./graph_generation.bbl [5]) [6] (./graph_generation.aux) ) 
+(./comment.cut)
+\openout3 = `comment.cut'.
+
+ (./comment.cut)
+\openout3 = `comment.cut'.
+
+ [5] (./comment.cut)
+Overfull \hbox (1.11156pt too wide) in paragraph at lines 369--376
+[]\OT1/cmr/m/n/10 Les mod^^Reles pr^^Sec^^Sedents per-me-t-tent de g^^Sen^^Sere
+r des graphes d'une taille donn^^See
+ []
+
+(./graph_generation.bbl [6]) [7] (./graph_generation.aux) ) 
 Here is how much of TeX's memory you used:
- 2833 strings out of 495062
- 36208 string characters out of 1182643
+ 2845 strings out of 495062
+ 36375 string characters out of 1182643
  98174 words of memory out of 3000000
- 5969 multiletter control sequences out of 15000+50000
+ 5973 multiletter control sequences out of 15000+50000
  8590 words of font info for 33 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  27i,12n,24p,284b,379s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on graph_generation.dvi (6 pages, 24200 bytes).
+Output written on graph_generation.dvi (7 pages, 29796 bytes).
