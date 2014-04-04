@@ -1,0 +1,89 @@
+%        File: 20140331.tex
+%     Created: Fri Apr 04 12:00 PM 2014 C
+% Last Change: Fri Apr 04 12:00 PM 2014 C
+%
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[left=3cm, right=3cm, top=4cm, bottom=4cm]{geometry}
+
+\begin{document}
+
+\section*{Community detection}
+\label{sec:Community detection}
+Une partie des données est sur le téléphone et ne peut être transférée telle
+quelle au serveur (les SMS par exemples).
+La détection de communauté est motivée par deux possibilités applicatives :
+\begin{itemize}
+    \item Le filtre de contact (auto-tribus)
+    \item La proposition de contenu en fonction de la communauté détectée
+\end{itemize}
+Attention cependant, les méthodes présentées lors du meeting précédent étaient
+des méthodes de \emph{clustering}: elles proposent une partition du graphe ce
+qui implique que l'on ne peut pas obtenir de communautés se recouvrant les unes
+les autres. Ce comportement pourrait pourtant être bénéfique pour indexé les
+utilisateurs selon des thématiques concrètes.
+
+[Problème: distribution par rapport aux données]
+
+Un autre point abordé sur la détection de communauté est la notion de retour
+des utilisateurs. En effet, la détection de communauté avec \emph{feedback} est
+un domaine ouvrant de nouvelles considérations (processus de décision
+markovien, apprentissage par renforcement). Il y aura un retour des
+utilisateurs par rapport aux suggestions qui seront faîtes. Il aura trois
+niveaux: négatif, neutre et positif.
+
+Interrogation de Pascal Béglin: il n'y pas d'approche liée aux données dans ce
+qui est discuté pour l'instant.
+
+Pour Lilian, l'application est la combinaison de trois points de vue par
+rapport aux messages:
+\begin{itemize}
+    \item Intimacy: idée de cercles plus ou moins intimes
+    \item Nature du message/contenu
+    \item Ce que propose une personne
+\end{itemize}
+Les trois approches existent dans les différents moteurs de recommandations
+existants sur le marché mais ne sont jamais combinés tous ensemble.
+
+De manière plus globale, il y a deux problèmes auxquels l'application devra
+répondre :
+\begin{itemize}
+    \item Pousser des tribus intialement. Cela signifie donc être capable de
+        taguer concrètement une tribu. Il faut donc également pour superposer
+        les communautés ainsi trouvées.
+    \item Une fois la période de croisière atteinte, regarder les tribus
+        existantes dans un cluster donner afin d'adapter les suggestions à
+        l'utilisateur.
+\end{itemize}
+
+Autrement dit, il faut organiser un ??? (Pinterest, \emph{Timeline}) sauf que
+l'utilisateur peut devenir contact avec des personnes en particulier des tribus
+pour les connaître en particulier.
+
+Une autre question va également se situer au niveau de la mesure de qualité. Il
+faudra être capable de comparer les tribus. Les connexions entre les
+utilisateurs qui seront représentées dans le graphe doivent être également
+déterminées. En effet, une connexion représente un lien (plus ou moins fort si
+l'on y associe un poids) mais ce lien peut signifier plusieurs choses --
+intensité, occurrence de messages sur une fenêtre de temps plus ou moins longue
+-- qui sont à choisir par StreamWide selon la valeur qu'ils accordent aux
+différentes relations entre les utilisateurs.
+
+Du côté Télécom, il faut faire le point sur la distribution multit\^ache pour
+l'optimisation.
+
+\section*{Tribus}
+\label{sec:Tribus}
+Les tribus sont un moyen de regrouper les utilisateurs de manière plus souple
+et moins nécessairement intrusive que les cercles ou les liens d'amitié. Il
+n'est pas nécessaire d'avoir son nom réel affiché pour les autres utilisateurs
+de la tribu. Cela également pour le pseudonyme. Il y a possibilité de faire une
+tribu privée sur invitation ou invitation d'invitation ; il est également
+envisageable de faire des groupes complètement privées, avec invitation par des
+modérateurs uniquement.
+
+\end{document}
+
+
