@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=latex 2013.10.28)  4 APR 2014 13:15
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=latex 2013.10.28)  15 APR 2014 11:22
 entering extended mode
  file:line:error style messages enabled.
  %&-line parsing enabled.
@@ -360,21 +360,21 @@ driver: dvips
 (1in=72.27pt, 1cm=28.45pt)
 -----------------------
 
-Overfull \hbox (19.1537pt too wide) in paragraph at lines 79--86
+Overfull \hbox (19.1537pt too wide) in paragraph at lines 37--44
 []\OT1/cmr/m/n/10 Les tribus sont un moyen de re-grouper les util-isa-teurs de 
 mani^^Rere plus sou-ple et moins n^^Secessairement
  []
 
 [1
 
-] (./20140331.aux) ) 
+] [2] (./20140331.aux) ) 
 Here is how much of TeX's memory you used:
- 1512 strings out of 495062
- 19356 string characters out of 1182643
+ 1514 strings out of 495062
+ 19377 string characters out of 1182643
  82438 words of memory out of 3000000
- 4726 multiletter control sequences out of 15000+50000
- 4591 words of font info for 17 fonts, out of 3000000 for 9000
+ 4727 multiletter control sequences out of 15000+50000
+ 4899 words of font info for 18 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 24i,4n,24p,214b,121s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 24i,4n,24p,214b,185s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on 20140331.dvi (1 page, 5152 bytes).
+Output written on 20140331.dvi (2 pages, 5860 bytes).

@@ -10,8 +10,53 @@
 
 \begin{document}
 
-\section*{Community detection}
-\label{sec:Community detection}
+\begin{description}
+    \item \textbf{Présents}
+        \begin{itemize}
+            \item Pascal Béglin
+            \item Thomas Bouton
+            \item Stéphan Clémençon
+            \item Igor Colin
+            \item Lilian Gaichies
+            \item Joseph Salmon
+        \end{itemize}
+    \item \textbf{Ordre du jour}
+        \begin{itemize}
+            \item Présenter
+            \item Déterminer
+        \end{itemize}
+\end{description}
+
+\section*{Données de l'application}
+
+La récupération des données est en cours mais est rendue difficle par
+différents changements dans le format des données.
+
+\section*{Tribus}
+\label{sec:tribus}
+L'application intègre un nouveau concept : la tribu. Les tribus sont un moyen
+de regrouper les utilisateurs de manière plus souple et moins intrusive que les
+cercles ou les liens d'amitié. Il n'est pas nécessaire d'avoir son nom réel
+affiché pour les autres utilisateurs de la tribu. Il y a possibilité de faire
+une tribu privée sur invitation ou invitation d'invitation ; il est également
+envisageable de faire des groupes complètement privées, avec invitation par des
+modérateurs uniquement.
+
+Cette notion de tribu pourra être intéressante à explorer pour effectuer des
+recommandations ou des créations automatiques de tribus.
+
+\section*{Analyse du graphe utilisateurs}
+\label{sec:community_detection}
+Lors du meeting précédent, des méthodes de partitionnement de graphe avaient été
+présentées. La motivation applicative portait sur la proposition automatique
+de tribu ainsi que sur les recommandations en fonction de la communauté
+d'appartenance. Ces méthodes ne permettent cependant pas d'obtenir des communautés
+se recouvrant les unes les autres : cela serait pourtant bénéfique pour indexer
+les utilisateurs selon des thématiques concrètes. En effet, un objectif à court
+terme de l'application est de pousser des tribus initialement. Il est donc
+nécessaire d'avoir une caractérisation concrète des tribus à proposer : cette
+caractérisation correspondrait à l'intersection des communautés associées à la
+tribu.
 Une partie des données est sur le téléphone et ne peut être transférée telle
 quelle au serveur (les SMS par exemples).
 La détection de communauté est motivée par deux possibilités applicatives :
@@ -74,16 +119,4 @@ différentes relations entre les utilisateurs.
 Du côté Télécom, il faut faire le point sur la distribution multit\^ache pour
 l'optimisation.
 
-\section*{Tribus}
-\label{sec:Tribus}
-Les tribus sont un moyen de regrouper les utilisateurs de manière plus souple
-et moins nécessairement intrusive que les cercles ou les liens d'amitié. Il
-n'est pas nécessaire d'avoir son nom réel affiché pour les autres utilisateurs
-de la tribu. Cela également pour le pseudonyme. Il y a possibilité de faire une
-tribu privée sur invitation ou invitation d'invitation ; il est également
-envisageable de faire des groupes complètement privées, avec invitation par des
-modérateurs uniquement.
-
 \end{document}
-
-

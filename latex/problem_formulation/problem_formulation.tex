@@ -1,0 +1,103 @@
+%        File: problem_formulation.tex
+%     Created: Tue Apr 15 12:00 PM 2014 C
+% Last Change: Tue Apr 15 12:00 PM 2014 C
+%
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\begin{document}
+
+Soit $G = (V, E)$ un graphe d'utilisateurs. En notant $N$ le cardinal de $V$, on
+identifie ce dernier avec $\{1,\ldots,N\}$. On considère dans un premier temps
+des arrêtes sans poids, soit $E \subset V \times V$.
+
+Chaque utilisateur $v \in V$ est caractérisé par un vecteur
+$\mathbf{X}_v \in \mathbb{R}^d$ pour un certain $d > 0$. On suppose pour l'instant
+que la dimension $d$ est la même pour tous les utilisateurs.
+
+Pour résoudre les différents problèmes posés, nous avons à disposition
+$N + 1$ agents : les $N$ sommets du graphe et un serveur extérieur, que l'on
+indicera par $0$. Pour représenter l'information disponible pour chaque agent,
+on décompose, pour un utilisateur $v \in V$ donné, le vecteur $\mathbf{X}_v$ sous
+la forme suivante :
+\[
+    \mathbf{X}_v = \left[ \mathbf{X}_v^{(1)}, \mathbf{X}_v^{(2)}, \mathbf{X}_v^{(3)} \right],
+\]
+avec $\mathbf{X}_v^{(j)} \in \mathbb{R}^{d_j}$ pour $1 \leq j \leq 3$ et $\sum_{j=1}^3 d_j = d$.
+La première partie représente l'information accessible par les utilisateurs
+connectés à $v$. La seconde partie représente l'information supplémentaire
+accessible par le serveur. Enfin, la dernière partie représente les informations
+n'étant accessibles qu'à $v$ lui-même.
+
+L'agent $0$ a à sa disposition les informations suivantes :
+\begin{itemize}
+    \item $\{\mathbf{X}_i^{(1)}, \; i \in V\}$
+    \item $\left\{\mathbf{X}_i^{(2)}, \; i \in V \right\}$
+\end{itemize}
+Un agent $i \in \{1,\ldots,N\}$ a quant à lui accès aux informations suivantes :
+\begin{itemize}
+    \item $\mathbf{X}_i$
+    \item $\left\{ \mathbf{X}_j^{(1)}, \; (i, j) \in E \right\}$
+\end{itemize}
+
+L'objectif est d'identifier des communautés dans le graphe, en utilisant les
+données accessibles à chaque n\oe{}ud du graphe, tout en limitant l'échange
+d'information entre les différents n\oe{}uds.
+
+Pour $C \subset V$, on définit la fonction $\mathbf{1}_C : V \rightarrow \{0, 1\}$
+qui à tout élément $v$ de $V$ associe $1$ si $v \in C$ et $0$ sinon.
+
+\section{Utiliser les attributs des n\oe{}uds}
+\label{sec:utiliser_attributs_noeuds}
+Une première approche naïve pour arriver à construire des communautés
+pouvant être \og{} étiquetées \fg est de se concentrer sur les attributs des différents
+n\oe{}uds : on souhaiterait regrouper les utilisateurs ayant des intérêts communs
+sans forcément se préoccuper de leur proximité dans le graphe.
+
+\subsection{Clustering}
+\label{sub:clustering}
+Le \emph{clustering} consiste à trouver une partition $\mathcal{P}$ de $V$ minimisant
+une inertie $W(\mathcal{P})$. On définit par cette intertie par :
+\[
+    W(\mathcal{P}) = \frac{2}{n(n-1)} \sum_{1 \leq i < j \leq N} D(\mathbf{X}_i, \mathbf{X}_j) \Phi_{\mathcal{P}}(i, j),
+\]
+où $D(\mathbf{X}_i, \mathbf{X}_j)$ est une mesure de dissimilarité entre
+$\mathbf{X}_i$ et $\mathbf{X}_j$ et $\Phi_{\mathcal{P}}(i, j)$
+vaut $1$ si $i$ et $j$ sont dans le même \emph{cluster}, $0$ sinon.
+
+Dans notre cas, si l'on ne s'intéresse pas aux connexions entre les utilisateurs,
+on peut se baser sur la similarité cosinus pour définir :
+\[
+    D:\left\{
+        \begin{array}{r c l}
+            V \times V & \rightarrow & [0, 1] \\
+            (X_i, X_j) & \mapsto & \frac{1 - \mathbf{X}_i^T \mathbf{X}_j}{2}
+        \end{array}
+    \right.
+\]
+Cette définition pose cependant un problème. En effet, il n'est possible pour aucun
+agent de calculer explicitement $D(X_i,X_j)$, pour tout $i \neq j$, car aucun agent n'a accès
+simultanément à $\mathbf{X}^{(3)}_i$ et $\mathbf{X}^{(3)}_j$. Soit $D^{(1)}$ l'approximation \og{} au
+premier ordre \fg de D :
+\[
+    D^{(1)}:\left\{
+        \begin{array}{r c l}
+            V \times V & \rightarrow & [0, 1] \\
+            (X_i, X_j) & \mapsto & \frac{1 - {\mathbf{X}^{(1)}_i}^T \mathbf{X}^{(1)}_j}{2}
+        \end{array}
+    \right.
+\]
+Désormais, si $(i, j) \in E$, alors les agents $i$ et $j$ peuvent calculer
+$D^{(1)}(\mathbf{X}_i, \mathbf{X}_j)$.
+
+\end{document}
+
+

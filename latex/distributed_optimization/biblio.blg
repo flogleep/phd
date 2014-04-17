@@ -1,0 +1,45 @@
+This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+The top-level auxiliary file: biblio.aux
+The style file: alpha.bst
+Database file #1: distributed_optimization.bib
+You've used 1 entry,
+            2543 wiz_defined-function locations,
+            565 strings with 4700 characters,
+and the built_in function-call counts, 585 in all, are:
+= -- 58
+> -- 31
+< -- 1
++ -- 12
+- -- 12
+* -- 42
+:= -- 100
+add.period$ -- 4
+call.type$ -- 1
+change.case$ -- 8
+chr.to.int$ -- 1
+cite$ -- 1
+duplicate$ -- 22
+empty$ -- 40
+format.name$ -- 13
+if$ -- 122
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 1
+newline$ -- 8
+num.names$ -- 3
+pop$ -- 10
+preamble$ -- 1
+purify$ -- 9
+quote$ -- 0
+skip$ -- 18
+stack$ -- 0
+substring$ -- 26
+swap$ -- 7
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 8
+warning$ -- 0
+while$ -- 6
+width$ -- 2
+write$ -- 16

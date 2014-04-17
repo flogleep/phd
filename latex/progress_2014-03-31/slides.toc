@@ -1,0 +1,4 @@
+\beamer@endinputifotherversion {3.10pt}
+\select@language {french}
+\beamer@sectionintoc {1}{Objectifs}{1}{0}{1}
+\beamer@sectionintoc {2}{G\IeC {\'e}n\IeC {\'e}ration al\IeC {\'e}atoire de graphe}{5}{0}{2}

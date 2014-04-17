@@ -1,0 +1,186 @@
+\documentclass[c]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+
+\newtheorem*{deffr}{Définition}
+\newtheorem*{propriete}{Propriété}
+\newtheorem*{theofr}{Théorème}
+
+\usepackage{graphicx}
+\usepackage{array}
+
+\usetheme{Warsaw}
+
+\title{Dynamique d'un graphe}
+\author{Igor Colin}
+\date{\today}
+
+\setbeamertemplate{navigation symbols}{}
+
+\AtBeginSection[]
+{
+    \begin{frame}<beamer>
+        \tableofcontents[currentsection]
+    \end{frame}
+}
+
+\begin{document}
+
+%\maketitle
+
+\section{Objectifs}
+
+\begin{frame}
+    \frametitle{Objectifs}
+
+    \begin{itemize}
+        \item<1-> Modélisation des données à l'aide d'un graphe
+            \begin{itemize}
+                \item N\oe{}uds : utilisateurs
+                \item Arrêtes : contact, influence, etc.
+            \end{itemize}
+        \item<2-> Intérêt pour la notion de communauté :
+            \begin{itemize}
+                \item Suggestion de contenus adaptés
+                \item Proposition de groupe
+            \end{itemize}
+        \item<3-> Calculs sur serveur mais aussi en local
+            \begin{itemize}
+                \item Puissance de calcul raisonnable
+                \item Mémoire limitée
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\section{Génération aléatoire de graphe}
+
+\begin{frame}
+    \frametitle{Motivation}
+
+    \begin{itemize}
+        \item<1-> Volume de données faible
+        \item<2-> Méthodes robustes
+        \item<3-> Tests de scénarios
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Modèle $p_1$}
+    \framesubtitle{Idée}
+
+    \begin{itemize}
+        \item<1-> Principe
+            \begin{itemize}
+                \item Modèle paramétrique
+                \item Paramètres physiques/concrets (popularité, etc.)
+                \item Apprentissage des paramètres sur un réseau réel (maximum
+                    de vraisemblance)
+            \end{itemize}
+        \item<2-> Paramètres
+            \begin{itemize}
+                \item Expansion global du graphe $\theta$
+                \item Expansion d'un n\oe{}ud $\alpha_i$
+                \item Popularité d'un n\oe{}ud $\beta_i$
+                \item Intérêt mutuel $\rho_{ij} = \rho_{ji}$ (ex: Twitter)
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Modèle $p_1$}
+    \framesubtitle{Vraisemblance}
+
+    \begin{table}
+        \begin{tabular}[c]{m{.2\textwidth} m{.05\textwidth} m{.5\textwidth}}
+                \includegraphics[width=.2\textwidth]{./figures/p1_00.pdf}
+                & : &
+                $\lambda_{ij}$ (normalisation)\\
+                \includegraphics[width=.2\textwidth]{./figures/p1_10.pdf}
+                & : &
+                $\lambda_{ij} + \alpha_i + \beta_j + \theta$ \\
+                \includegraphics[width=.2\textwidth]{./figures/p1_01.pdf}
+                & : &
+                $\lambda_{ij} + \alpha_j + \beta_i + \theta$ \\
+                \includegraphics[width=.2\textwidth]{./figures/p1_11.pdf}
+                & : &
+                $\lambda_{ij} + \alpha_i + \alpha_j + \beta_i + \beta_j + 2\theta + \rho_{ij}$
+        \end{tabular}
+        \caption{Log-vraisemblance en fonction des paramètres.}
+    \end{table}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Modèle $p_1$}
+    \framesubtitle{Exemple}
+    \begin{figure}
+        \includegraphics[width=.7\textwidth]{./figures/p1_popularite.png}
+        \caption{Modifications du graphe pour différentes valeurs de $\beta_0$.}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Modèle $p_1$}
+    \framesubtitle{Discussion}
+
+    Avantages du modèle
+    \begin{itemize}
+        \item Modèle simple
+        \item Calcul aisé dans cas favorables
+        \item Paramètres interprétables
+        \item Nombreuses variantes :
+            \begin{itemize}
+                \item Dynamique (chaîne de Markov)
+                \item Bayésienne
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Modèle $p_1$}
+    \framesubtitle{Discussion}
+
+    \begin{columns}
+        \begin{column}{.6\textwidth}
+             \'Evaluation du modèle : quelle métrique utiliser ?
+            \begin{itemize}
+                \item Métriques usuelles peu pertinentes (précision)
+                \item Pertinence de la distance directement liée à l'exploitation
+                    souhaitée des données
+            \end{itemize}
+        \end{column}
+        \begin{column}{.5\textwidth}
+            \begin{figure}
+                \includegraphics[width=.9\textwidth]{./figures/p1_distance.png}
+            \end{figure}
+        \end{column}
+    \end{columns}
+
+\end{frame}
+
+%\section{Détection de communauté}
+%
+%\begin{frame}
+%    \frametitle{Approche spectrale usuelle}
+%
+%    \begin{itemize}
+%        \item Objectif : trouver le partionnement du graphe qui maximise la
+%            modularité
+%        \item Obtention via la matrice laplacienne
+%        \item Calcul de valeurs propres coûteux : obligation d'effectuer le
+%            calcul sur un serveur ou de revoir complétement la méthode si le
+%            réseau est trop grand
+%    \end{itemize}
+%\end{frame}
+%
+%\begin{frame}
+%    \frametitle{Approche spectrale randomisée}
+%
+%
+%\end{frame}
+
+\end{document}
