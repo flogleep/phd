@@ -38,65 +38,124 @@
                 \item Caract\'eristiques
                 \item Calcul potentiel
             \end{itemize}
+        \vspace{.3cm}
         \item[Objectifs]
             \begin{itemize}
                 \item Regrouper les utilisateurs par caract\'eristiques communes
                 \item R\'epartir le calcul
             \end{itemize}
+        \vspace{.3cm}
         \item[Contraintes]
             \begin{itemize}
                 \item Informations priv\'ees
                 \item Limitation de la communication
             \end{itemize}
+        \vspace{.3cm}
     \end{description}
 \end{frame}
 
 \section{Mod\'elisation}
 \begin{frame}
     \frametitle{Notations}
-    \begin{description}
-        \item[R\'eseau des utilisateurs] :
-            
-            $G = (V, E)$, $V = \{1, \ldots, N\}$
-        \item[Caract\'eristiques] :
-            
-            $\left( X_v \right)_{1 \leq v \leq N}$
-    \end{description}
+    \begin{itemize}
+        \item R\'eseau des utilisateurs $G = (V, E), \; V = \{1, \ldots, N\}$
+            \vspace{.3cm}
+        \item Caract\'eristiques $\mathbf{X} = \left( X_i \right)_{1 \leq i \leq N}$
+            \vspace{0.15cm}
+
+            ex: SMS, a écouté [XXX], a partagé [YYY]
+            \vspace{.3cm}
+        \item Distance entre utilisateurs :
+            \[
+                        D:\left\{
+                        \begin{array}{r c l}
+                            V \times V & \rightarrow & \mathbb{R}_+ \\
+                            (x, y) & \mapsto & D(x, y)
+                        \end{array}
+                        \right.
+                    \]
+
+                    $D(x, y) = 0 \iff x = y$
+                
+                    $D(x, y) = \|x - y\|_p$
+
+
+    \end{itemize}
 \end{frame}
 
 \begin{frame}
     \frametitle{Formulation}
+    \begin{itemize}
+        \item Objectif : partitionner par affinités
+        \item
     Problème à r\'esoudre :
 
     \[
         \begin{aligned}
             & \min_{\mathcal{P}}
             && W\left(\mathcal{P} \right)
-            = \frac{2}{n(n-1)} \sum_{1 \leq i < j \leq N} D(X_i, X_j) \Phi_{\mathcal{P}}(X_i, X_j),
+            = \frac{2}{n(n-1)} \sum_{1 \leq i < j \leq N} D(X_i, X_j) \Phi_{\mathcal{P}}(i, j),
         \end{aligned}
     \]
 
-    \begin{description}
-        \item[Dissimilarit\'e des caract\'eristiques] :
+    \end{itemize}
 
+\end{frame}
+
+\section{Résolution}
+\begin{frame}
+    \frametitle{Contraintes}
+
+    \begin{itemize}
+        \item Contraintes supplémentaires :
+        \begin{itemize}
+            \item Distribution du calcul
+            \item Limitation du transfert de données
+        \end{itemize}
+    
+        \item Problème d'optimisation distribuée
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Énoncé}
+
+    Nouvelle formulation du problème :
+    \[
+        \begin{aligned}
+            & \min_{\mathcal{P}}
+            && W\left(\mathcal{P} \right)
+            = \frac{1}{n} \sum_{1 \leq i \leq N} f_i(\mathbf{X}),
+        \end{aligned}
+    \]
+    où
+    \[
+        f_i(\mathbf{X}) = \frac{1}{n} \sum_{1 \leq j \leq N} D(X_i, X_j) \Phi_{\mathcal{P}}(i, j)
+    \]
+\end{frame}
+
+\begin{frame}
+
+    \begin{itemize}
+        \item Principe
             \begin{itemize}
-                \item
-                    $D:\left\{
-                    \begin{array}{r c l}
-                        V \times V & \rightarrow & \mathbb{R}_+ \\
-                        (x, y) & \mapsto & D(x, y)
-                    \end{array}
-                    \right.$
-                \item $D(x, y) = 0 \iff x = y$
-                \item $D(x, y) = \|x - y\|_p$
+            \item Utilisateur $i$ effectue seul le calcul de $f_i$
+            \item Communication possible avec le voisinnage
             \end{itemize}
-        \item[Proximit\'e dans la partition] :
-            $\mathcal{P} = \left( C_1, \ldots, C_k \right)$
+        \item Intérêt
+            \begin{itemize}
+                    \item Problème décomposé suivant chaque utilisateur
+                    \item Nombreuses méthodes si problème convexe
+                    \item Possibilité d'optimiser en ligne
+            \end{itemize}
+        \item Challenges
+            \begin{itemize}
+                \item $f_i$ non calculable par $i$
+                \item Estimation de $f_i$
+            \end{itemize}
+    \end{itemize}
 
-            $\Phi_{\mathcal{P}}(i, j) = \mathbf{1}_{\{i \text{ et } j \text{ sont dans le même
-            cluster}\}}$
-
-    \end{description}
 \end{frame}
 
 \end{document}
