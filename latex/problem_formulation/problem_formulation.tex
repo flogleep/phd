@@ -74,12 +74,12 @@ $\mathbf{X}_i$ et $\mathbf{X}_j$ et $\Phi_{\mathcal{P}}(i, j)$
 vaut $1$ si $i$ et $j$ sont dans le même \emph{cluster}, $0$ sinon.
 
 Dans notre cas, si l'on ne s'intéresse pas aux connexions entre les utilisateurs,
-on peut se baser sur la similarité cosinus pour définir :
+on peut par exemple se baser sur la similarité cosinus pour définir :
 \[
     D:\left\{
         \begin{array}{r c l}
             V \times V & \rightarrow & [0, 1] \\
-            (X_i, X_j) & \mapsto & \frac{1 - \mathbf{X}_i^T \mathbf{X}_j}{2}
+            (X_i, X_j) & \mapsto & \frac{1}{2} - \frac{\mathbf{X}_i^T \mathbf{X}_j}{2\|\mathbf{X}_i\|_2 \|\mathbf{X}_j\|_2}
         \end{array}
     \right.
 \]

@@ -1,0 +1,102 @@
+\documentclass[c]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+
+\newtheorem*{deffr}{Définition}
+\newtheorem*{propriete}{Propriété}
+\newtheorem*{theofr}{Théorème}
+
+\usepackage{graphicx}
+\usepackage{array}
+
+\usetheme{Warsaw}
+
+\title{Optimisation distribu\'ee}
+\author{Igor Colin}
+\date{\today}
+
+\setbeamertemplate{navigation symbols}{}
+
+\AtBeginSection[]
+{
+    \begin{frame}<beamer>
+        \tableofcontents[currentsection]
+    \end{frame}
+}
+
+\begin{document}
+
+\begin{frame}
+    \begin{description}
+        \item[Contexte]
+            \begin{itemize}
+                \item Ensemble d'utilisateurs
+                \item Caract\'eristiques
+                \item Calcul potentiel
+            \end{itemize}
+        \item[Objectifs]
+            \begin{itemize}
+                \item Regrouper les utilisateurs par caract\'eristiques communes
+                \item R\'epartir le calcul
+            \end{itemize}
+        \item[Contraintes]
+            \begin{itemize}
+                \item Informations priv\'ees
+                \item Limitation de la communication
+            \end{itemize}
+    \end{description}
+\end{frame}
+
+\section{Mod\'elisation}
+\begin{frame}
+    \frametitle{Notations}
+    \begin{description}
+        \item[R\'eseau des utilisateurs] :
+            
+            $G = (V, E)$, $V = \{1, \ldots, N\}$
+        \item[Caract\'eristiques] :
+            
+            $\left( X_v \right)_{1 \leq v \leq N}$
+    \end{description}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Formulation}
+    Problème à r\'esoudre :
+
+    \[
+        \begin{aligned}
+            & \min_{\mathcal{P}}
+            && W\left(\mathcal{P} \right)
+            = \frac{2}{n(n-1)} \sum_{1 \leq i < j \leq N} D(X_i, X_j) \Phi_{\mathcal{P}}(X_i, X_j),
+        \end{aligned}
+    \]
+
+    \begin{description}
+        \item[Dissimilarit\'e des caract\'eristiques] :
+
+            \begin{itemize}
+                \item
+                    $D:\left\{
+                    \begin{array}{r c l}
+                        V \times V & \rightarrow & \mathbb{R}_+ \\
+                        (x, y) & \mapsto & D(x, y)
+                    \end{array}
+                    \right.$
+                \item $D(x, y) = 0 \iff x = y$
+                \item $D(x, y) = \|x - y\|_p$
+            \end{itemize}
+        \item[Proximit\'e dans la partition] :
+            $\mathcal{P} = \left( C_1, \ldots, C_k \right)$
+
+            $\Phi_{\mathcal{P}}(i, j) = \mathbf{1}_{\{i \text{ et } j \text{ sont dans le même
+            cluster}\}}$
+
+    \end{description}
+\end{frame}
+
+\end{document}
