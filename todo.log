@@ -1,5 +1,6 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.10.28)  17 MAR 2014 12:34
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=latex 2013.10.28)  6 MAY 2014 12:44
 entering extended mode
+ file:line:error style messages enabled.
  %&-line parsing enabled.
 **todo.tex
 (./todo.tex
@@ -279,7 +280,7 @@ Package: geometry 2008/12/21 v4.2 Page Geometry
 
 (/usr/share/texmf-texlive/tex/generic/oberdiek/ifpdf.sty
 Package: ifpdf 2009/04/10 v2.0 Provides the ifpdf switch (HO)
-Package ifpdf Info: pdfTeX in pdf mode detected.
+Package ifpdf Info: pdfTeX in pdf mode not detected.
 )
 (/usr/share/texmf-texlive/tex/generic/oberdiek/ifvtex.sty
 Package: ifvtex 2008/11/04 v1.4 Switches for detecting VTeX and its modes (HO)
@@ -2538,11 +2539,10 @@ Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 (/etc/texmf/tex/latex/config/graphics.cfg
 File: graphics.cfg 2009/08/28 v1.8 graphics configuration of TeX Live
 )
-Package graphics Info: Driver file: pdftex.def on input line 91.
+Package graphics Info: Driver file: dvips.def on input line 91.
 
-(/usr/share/texmf-texlive/tex/latex/pdftex-def/pdftex.def
-File: pdftex.def 2010/03/12 v0.04p Graphics/color for pdfTeX
-\Gread@gobject=\count106
+(/usr/share/texmf-texlive/tex/latex/graphics/dvips.def
+File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
 ))
 \Gin@req@height=\dimen119
 \Gin@req@width=\dimen120
@@ -2573,17 +2573,17 @@ Defining \l_xparse_function_tl on line 73
 \l_xparse_last_arg_tl=\toks46
 Defining \l_xparse_long_bool on line 75
 Defining \l_xparse_m_args_int on line 76
-\l_xparse_m_args_int=\count107
+\l_xparse_m_args_int=\count106
 Defining \l_xparse_m_only_bool on line 77
 Defining \l_xparse_mandatory_args_int on line 78
-\l_xparse_mandatory_args_int=\count108
+\l_xparse_mandatory_args_int=\count107
 Defining \l_xparse_processor_bool on line 79
 Defining \l_xparse_processor_int on line 80
-\l_xparse_processor_int=\count109
+\l_xparse_processor_int=\count108
 \l_xparse_signature_toks=\toks47
 Defining \l_xparse_tmp_tl on line 82
 Defining \l_xparse_total_args_int on line 83
-\l_xparse_total_args_int=\count110
+\l_xparse_total_args_int=\count109
 Defining \q_xparse_stop on line 84
 Defining \xparse_add_grabber_mandatory:N on line 93
 Defining \xparse_add_grabber_optional:N on line 106
@@ -2787,12 +2787,12 @@ Package: booktabs 2005/04/14 v1.61803 publication quality tables
 \cmidrulesep=\dimen129
 \cmidrulekern=\dimen130
 \defaultaddspace=\dimen131
-\@cmidla=\count111
-\@cmidlb=\count112
+\@cmidla=\count110
+\@cmidlb=\count111
 \@aboverulesep=\dimen132
 \@belowrulesep=\dimen133
-\@thisruleclass=\count113
-\@lastruleclass=\count114
+\@thisruleclass=\count112
+\@lastruleclass=\count113
 \@thisrulewidth=\dimen134
 ) (./todo.aux)
 \openout1 = `todo.aux'.
@@ -2826,7 +2826,7 @@ Package frenchb.ldf Warning: OT1 encoding should not be used for French.
 (frenchb.ldf)                of your document, on input line 21.
 
 *geometry auto-detecting driver*
-*geometry detected driver: pdftex*
+*geometry detected driver: dvips*
 -------------------- Geometry parameters
 paper: a4paper
 landscape: --
@@ -2844,7 +2844,7 @@ truedimen: --
 includehead: --
 includefoot: --
 includemp: --
-driver: pdftex
+driver: dvips
 -------------------- Page layout dimensions and switches
 \paperwidth  597.50787pt
 \paperheight 845.04684pt
@@ -2866,25 +2866,12 @@ driver: pdftex
 
 (1in=72.27pt, 1cm=28.45pt)
 -----------------------
-(/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
-[Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count115
-\scratchdimen=\dimen135
-\scratchbox=\box29
-\nofMPsegments=\count116
-\nofMParguments=\count117
-\everyMPshowfont=\toks52
-\MPscratchCnt=\count118
-\MPscratchDim=\dimen136
-\MPnumerator=\count119
-\everyMPtoPDFconversion=\toks53
-)
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 27.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 27.
 LaTeX Font Info:    Try loading font information for OT1+ptm on input line 36.
- (/usr/share/texmf-texlive/tex/latex/psnfss/ot1ptm.fd
+(/usr/share/texmf-texlive/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 LaTeX Font Info:    Try loading font information for TS1+ptm on input line 36.
@@ -2896,27 +2883,19 @@ File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <5.58325> not available
 (Font)              size <6> substituted on input line 36.
 
-[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./todo.aux)
+[1] (./todo.aux)
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.41675pt have occurred.
 
  ) 
 Here is how much of TeX's memory you used:
- 6465 strings out of 495061
- 101635 string characters out of 1182620
- 140586 words of memory out of 3000000
- 9537 multiletter control sequences out of 15000+50000
- 5840 words of font info for 18 fonts, out of 3000000 for 9000
+ 6097 strings out of 495062
+ 96700 string characters out of 1182643
+ 135138 words of memory out of 3000000
+ 9177 multiletter control sequences out of 15000+50000
+ 4762 words of font info for 17 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  37i,13n,35p,219b,349s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-texli
-ve/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/ty
-pe1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/a
-msfonts/cm/cmr6.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb>
-Output written on todo.pdf (1 page, 36923 bytes).
-PDF statistics:
- 23 PDF objects out of 1000 (max. 8388607)
- 0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
+Output written on todo.dvi (1 page, 1352 bytes).

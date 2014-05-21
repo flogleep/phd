@@ -35,13 +35,13 @@
         \item[Contexte]
             \begin{itemize}
                 \item Ensemble d'utilisateurs
-                \item Caract\'eristiques
-                \item Calcul potentiel
+                \item Caract\'eristiques utilisateurs observ\'ees
+                \item Potentiel de calcul des utilisateurs
             \end{itemize}
         \vspace{.3cm}
         \item[Objectifs]
             \begin{itemize}
-                \item Regrouper les utilisateurs par caract\'eristiques communes
+                \item Regrouper les utilisateurs en tribus
                 \item R\'epartir le calcul
             \end{itemize}
         \vspace{.3cm}
@@ -86,17 +86,26 @@
 \begin{frame}
     \frametitle{Formulation}
     \begin{itemize}
-        \item Objectif : partitionner par affinités
+        \item Objectif : partitionner en tribus, par affinités
         \item
-    Problème à r\'esoudre :
+            Problème à r\'esoudre : trouver une partition $\mathcal{P}^*$ solution de
 
     \[
         \begin{aligned}
             & \min_{\mathcal{P}}
             && W\left(\mathcal{P} \right)
-            = \frac{2}{n(n-1)} \sum_{1 \leq i < j \leq N} D(X_i, X_j) \Phi_{\mathcal{P}}(i, j),
+            = \frac{2}{N(N-1)} \sum_{1 \leq i < j \leq N} D(X_i, X_j) \Phi_{\mathcal{P}}(i, j),
         \end{aligned}
     \]
+
+
+    $\Phi_{\mathcal{P}}(i, j) = \left\{
+        \begin{array}{l l}
+            1& \text{ si $i$ et $j$ dans le même cluster} \\
+            0 & \text{ sinon}
+        \end{array}
+            \right.
+            $
 
     \end{itemize}
 
@@ -126,12 +135,12 @@
         \begin{aligned}
             & \min_{\mathcal{P}}
             && W\left(\mathcal{P} \right)
-            = \frac{1}{n} \sum_{1 \leq i \leq N} f_i(\mathbf{X}),
+            = \frac{1}{N} \sum_{1 \leq i \leq N} f_i(\mathbf{X}),
         \end{aligned}
     \]
     où
     \[
-        f_i(\mathbf{X}) = \frac{1}{n} \sum_{1 \leq j \leq N} D(X_i, X_j) \Phi_{\mathcal{P}}(i, j)
+        f_i(\mathbf{X}) = \frac{1}{N} \sum_{1 \leq j \leq N} D(X_i, X_j) \Phi_{\mathcal{P}}(i, j)
     \]
 \end{frame}
 
@@ -141,7 +150,7 @@
         \item Principe
             \begin{itemize}
             \item Utilisateur $i$ effectue seul le calcul de $f_i$
-            \item Communication possible avec le voisinnage
+            \item Communication restreinte : voisinage dans $G$, taux de donn\'ees
             \end{itemize}
         \item Intérêt
             \begin{itemize}
