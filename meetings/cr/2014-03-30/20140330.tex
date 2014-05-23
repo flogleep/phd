@@ -1,0 +1,105 @@
+%        File: 20140330.tex
+%     Created: Tue Apr 15 12:00 PM 2014 C
+% Last Change: Tue Apr 15 12:00 PM 2014 C
+%
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+
+\title{Compte-rendu de la r\'eunion du 31 mars 2014}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{description}
+    \item \textbf{Présents}
+        \begin{itemize}
+            \item Pascal Béglin
+            \item Thomas Bouton
+            \item Stéphan Clémençon
+            \item Igor Colin
+            \item Lilian Gaichies
+            \item Joseph Salmon
+        \end{itemize}
+    \item \textbf{Ordre du jour}
+        \begin{itemize}
+            \item Présenter des techniques de g\'en\'eration de graphes
+            \item Déterminer les donn\'ees du graphe exploitables
+        \end{itemize}
+\end{description}
+
+\section{Données de l'application}
+
+La récupération des données est en cours mais est rendue difficle par
+différents changements dans le format des données.
+
+\section{Tribus}
+\label{sec:tribus}
+L'application intègre un nouveau concept : la tribu. Les tribus sont un moyen
+de regrouper les utilisateurs de manière plus souple et moins intrusive que les
+cercles ou les liens d'amitié. Il n'est pas nécessaire d'avoir son nom réel
+affiché pour les autres utilisateurs de la tribu. Il y a possibilité de faire
+une tribu privée sur invitation ou invitation d'invitation ; il est également
+envisageable de faire des groupes complètement privés, avec invitation par des
+modérateurs uniquement.
+
+Cette notion de tribu pourra être utilis\'ee pour effectuer des
+recommandations ou des créations automatiques de tribus.
+
+\section{D\'etection de communaut\'es}
+Un objectif à court terme de l'application est de proposer automatiquement des
+tribus aux utilisateurs. Pour cela, il serait int\'eressant d'utiliser des techniques
+de d\'etection automatique de communaut\'es. Ces techniques devront cependant r\'epondre
+à deux critères :
+\begin{itemize}
+    \item Elles devront permettre la superposition de communaut\'es : ainsi une tribu
+        pourra être caract\'eris\'ee par l'intersection des communaut\'es la formant.
+    \item Ces approches devront aussi int\'egrer les donn\'ees existantes sur les
+        utilisateurs. En effet, l'objectif des tribus n'est pas de rassembler des
+        personnes proches par leurs contacts en commun mais par leurs centres
+        d'int\'erêts. De plus, l'utilisation de ces donn\'ees permettra de nommer
+        explicitement chaque communaut\'e et donc les tribus.
+\end{itemize}
+
+Un objectif à plus long terme de l'application sera, une fois les tribus en place,
+d'effectuer des recommandations adapt\'ees à un utilisateur. Les techniques de
+partitionnement pr\'ecedemment \'evoqu\'ees pourrait alors se r\'eveler utiles pour \'etudier
+les tribus pr\'esentes au sein d'un même \emph{cluster}.
+
+Enfin, la question de la mesure de qualit\'e doit \'egalement se poser. Il reste à d\'eterminer
+des critères permettant de quantifier la pertinence des tribus. Cela implique
+\'egalement de d\'ecider les \'el\'ements repr\'esentant les connexions entre utilisateurs
+(contact, occurence de messages, etc.).
+
+\section{Distribution des donn\'ees et du calcul}
+\label{sec:distribution_donnees_calcul}
+Actuellement, certaines donn\'ees pr\'esentes sur le t\'el\'ephone sont accessibles par l'application
+mais ne peuvent être transf\'er\'ees au serveur ; c'est le cas des SMS par exemple.
+La capacit\'e de calcul des smartphones \'etant de manière g\'en\'erale très correct, la question
+de la distribution des calculs se pose : il faut d\'efinir des m\'ethodes permettant
+de r\'epartir le calcul sur le graphe tout en imposant des contraintes sur le transfert des
+donn\'ees.
+
+\section*{TODO}
+\label{sec:todo}
+\begin{description}
+    \item \textbf{T\'el\'ecom}
+    \begin{itemize}
+        \item Faire le point sur la distribution multi-t\^aches pour l'optimisation
+    \end{itemize}
+    \item \textbf{Streamwide}
+    \begin{itemize}
+        \item R\'ecup\'erer les donn\'ees
+        \item D\'eterminer les \'elements pertinents à consid\'erer pour les connexions
+            entre utilisateurs
+    \end{itemize}
+\end{description}
+
+
+\end{document}
+
+

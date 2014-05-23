@@ -1,0 +1,100 @@
+%        File: 20131121.tex
+%     Created: Thu Nov 21 11:00 AM 2013 C
+% Last Change: Thu Nov 21 11:00 AM 2013 C
+%
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+
+\title{Compte-rendu de la r\'eunion du 21 novembre 2013}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{description}
+    \item[Pr\'esents]\hfill
+        \begin{itemize}
+            \item Pascal B\'eglin
+            \item Thomas Bouton
+            \item St\'ephan Cl\'emençon
+            \item Igor Colin
+            \item Joseph Salmon
+        \end{itemize}
+    \item[Ordre du jour]\hfill
+        \begin{itemize}
+            \item Pr\'esentation des diff\'erentes techniques utilis\'ees pour
+                les moteurs de recommandations
+            \item Pr\'esentation de l'application et formalisation du problème
+        \end{itemize}
+\end{description}
+
+\section{Fonctionnement de l'application}
+Deux utilisateurs peuvent s'\'echanger des contenus de diverses natures :
+texte (80\%), audio, vid\'eo, g\'eolocalisation ou fichiers.
+Ces informations sont transf\'er\'ees entre les usagers via un serveur.
+Les informations de type texte et g\'eolocalisation passant
+par ce serveur sont sauvegard\'ees. Concernant les donn\'ees audio, vid\'eo et
+les fichiers, seules les m\'etadata sont conserv\'ees.
+
+L'application a \'egalement pour but d'être adapt\'ee à chacun. L'objectif est
+que l'application puisse effectuer des recommandations de contenu (manag\'e ou
+g\'en\'er\'e par les utilisateurs) adapt\'ees à un besoin local. L'utilisateur
+pourra choisir de faire suivre ou non une recommandation lui \'etant faite. Il
+pourra \'egalement s\'electionner le groupe d'utilisateurs vers qui il souhaite
+faire suivre la recommandation.
+
+\section{Donn\'ees disponibles et besoins pour l'application}
+Les donn\'ees pouvant être exploit\'ees sont :
+\begin{itemize}
+    \item les informations sauvegard\'ees lors de leur passage sur le serveur
+    \item les graphes utilisateurs
+    \item les contenus à sugg\'erer, \'eventuellement accompagn\'es de
+        descriptions et de cat\'egories
+\end{itemize}
+Le r\'esultat souhait\'e est la production de suggestions pertinentes en se
+basant sur les donn\'ees disponibles. La mesure de la pertinence des
+suggestions peut se baser sur :
+\begin{itemize}
+    \item le taux de clic (disponible en temps r\'eel)
+    \item le partage du contenu propos\'e (disponible en temps r\'eel,
+        cible du partage inconnue)
+    \item notation des recommandations (à d\'eterminer)
+    \item temps d'affichage (selon annonceur)
+    \item achat du produit (selon annonceur)
+\end{itemize}
+Il est envisageable d'effectuer une partie des calculs directement sur le
+t\'el\'ephone comme par exemple l'analyse s\'emantique des messages. La
+capacit\'e de calculs sur les serveurs ne devrait pas être limitante pour
+l'instant.
+
+Il est n\'ecessaire d'avoir un outil capable de recommander du contenu
+rapidement, quite à produire quelque chose de très simple dans un premier
+temps.
+Le modèle retenu pour le moteur de recommandations devra être capable de
+s'adapter à la forte croissance potentielle du nombre d'utilisateurs.
+
+\section*{TODO}
+\label{sec:todo}
+\begin{description}
+    \item[StreamWide]\hfill
+        \begin{itemize}
+            \item Extraire les donn\'ees collect\'ees jusqu'à pr\'esent
+            \item Envoyer le fichier d'installation de l'application Android
+        \end{itemize}
+    \item[T\'el\'ecom]\hfill
+        \begin{itemize}
+            \item Approfondir la recherche bibliographique
+            \item Pr\'eparer une pr\'esentation technique plus sp\'ecifique par
+                rapport aux m\'ethodes à employer
+            \item Cr\'eer un r\'epertoire Dropbox pour regrouper les
+                connaissances
+        \end{itemize}
+\end{description}
+
+\end{document}
+
+

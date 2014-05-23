@@ -1,0 +1,54 @@
+\begin{thebibliography}{LCKF05}
+
+\bibitem[BGZ07]{blei2007statistical}
+Edoardo Airoldi David~M Blei, Stephen E Fienberg~Anna Goldenberg, and Eric P
+  Xing Alice~X Zheng.
+\newblock Statistical network analysis: Models, issues, and new directions.
+\newblock 2007.
+
+\bibitem[CCGJ02]{chen2002origin}
+Qian Chen, Hyunseok Chang, Ramesh Govindan, and Sugih Jamin.
+\newblock The origin of power laws in internet topologies revisited.
+\newblock In {\em INFOCOM 2002. Twenty-First Annual Joint Conference of the
+  IEEE Computer and Communications Societies. Proceedings. IEEE}, volume~2,
+  pages 608--617. IEEE, 2002.
+
+\bibitem[ER60]{erdHos1960evolution}
+Paul Erd{\H{o}}s and Alfr{\'e}d R{\'e}nyi.
+\newblock On the evolution of random graphs.
+\newblock {\em Magyar Tud. Akad. Mat. Kutat{\'o} Int. K{\"o}zl}, 5:17--61,
+  1960.
+
+\bibitem[LCKF05]{leskovec2005realistic}
+Jure Leskovec, Deepayan Chakrabarti, Jon Kleinberg, and Christos Faloutsos.
+\newblock Realistic, mathematically tractable graph generation and evolution,
+  using kronecker multiplication.
+\newblock In {\em Knowledge Discovery in Databases: PKDD 2005}, pages 133--145.
+  Springer, 2005.
+
+\bibitem[LKF07]{Leskovec:2007:GED:1217299.1217301}
+Jure Leskovec, Jon Kleinberg, and Christos Faloutsos.
+\newblock Graph evolution: Densification and shrinking diameters.
+\newblock {\em ACM Trans. Knowl. Discov. Data}, 1(1), March 2007.
+
+\bibitem[NSW01]{newman2001random}
+Mark~EJ Newman, Steven~H Strogatz, and Duncan~J Watts.
+\newblock Random graphs with arbitrary degree distributions and their
+  applications.
+\newblock {\em Physical Review E}, 64(2):026118, 2001.
+
+\bibitem[RJB96]{rao1996markov}
+A~Ramachandra Rao, Rabindranath Jana, and Suraj Bandyopadhyay.
+\newblock A markov chain monte carlo method for generating random (0,
+  1)-matrices with given marginals.
+\newblock {\em Sankhy{\=a}: The Indian Journal of Statistics, Series A}, pages
+  225--242, 1996.
+
+\bibitem[RPS12]{ray2012we}
+Jaideep Ray, Ali Pinar, and C~Seshadhri.
+\newblock Are we there yet? when to stop a markov chain while generating random
+  graphs.
+\newblock In {\em Algorithms and Models for the Web Graph}, pages 153--164.
+  Springer, 2012.
+
+\end{thebibliography}

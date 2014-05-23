@@ -1,0 +1,26 @@
+\begin{thebibliography}{}
+
+\bibitem[Cl{\'e}men{\c{c}}on, 2014]{clemenccon2014statistical}
+Cl{\'e}men{\c{c}}on, S. (2014).
+\newblock A statistical view of clustering performance through the theory of
+  u-processes.
+\newblock {\em Journal of Multivariate Analysis}, 124:42--56.
+
+\bibitem[Duchi et~al., 2012]{duchi2012dual}
+Duchi, J.~C., Agarwal, A., and Wainwright, M.~J. (2012).
+\newblock Dual averaging for distributed optimization: convergence analysis and
+  network scaling.
+\newblock {\em Automatic Control, IEEE Transactions on}, 57(3):592--606.
+
+\bibitem[Nesterov, 2009]{nesterov2009primal}
+Nesterov, Y. (2009).
+\newblock Primal-dual subgradient methods for convex problems.
+\newblock {\em Mathematical programming}, 120(1):221--259.
+
+\bibitem[Xiao et~al., 2010]{xiao2010dual}
+Xiao, L. et~al. (2010).
+\newblock Dual averaging methods for regularized stochastic learning and online
+  optimization.
+\newblock {\em Journal of Machine Learning Research}, 11(2543-2596):4.
+
+\end{thebibliography}

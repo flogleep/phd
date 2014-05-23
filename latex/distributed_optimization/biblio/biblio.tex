@@ -1,0 +1,87 @@
+%        File: biblio.tex
+%     Created: Tue Apr 15 01:00 PM 2014 C
+% Last Change: Tue Apr 15 01:00 PM 2014 C
+%
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage[]{amsmath}
+\usepackage[]{amsfonts}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\begin{document}
+
+\section{Online Learning Gossip Algorithm}
+\label{sec:olga}
+
+Cet algorithme d\'evelop\'e dans \cite{bianchi2013line} se penche sur le problème
+de la classification binaire. L'objectif est de r\'esoudre le problème
+de classification en r\'epartissant la pr\'ediction entre plusieurs agents
+tout en limitant leurs int\'eractions.
+
+Soit $(X, Y)$ un couple de variables al\'eatoires. $X$ est à valeurs dans un certain
+ensemble $\mathcal{X}$ et $Y$ est à valeur dans $\{-1, 1\}$. L'objectif est
+d'utiliser $X$ pour pr\'edire la valeur de $Y$. Pour cela, on va chercher à optimiser
+un certain critère. Ainsi, pour une fonction de coût $\varphi$ donn\'ees, on d\'efinit
+le risque $R_{\varphi}$ pour toute fonction $h : \mathcal{X} \rightarrow \mathbb{R}$ par :
+\[
+    R_{\varphi}(h) = \mathbb{E}_{(X,Y)} \left[\varphi\left( -Y h(X) \right)\right].
+\]
+L'objectif ici sera donc, pour un ensemble de fonction admissibles $\mathcal{H}$
+donn\'e, de trouver une fonction $h^*$ solution du problème d'optimisation :
+\begin{equation}
+    \label{eq:binary_class_opti}
+    \begin{aligned}
+        & \underset{h}{\text{minimiser}}
+        & & R_{\varphi}(H) \\
+        & \text{s.c.}
+        & & h \in \mathcal{H}
+    \end{aligned}
+\end{equation}
+Une fonction $h$ est appel\'ee classifieur.
+
+Dans le cas de l'optimisation distribu\'ee, on ajoute la contrainte suivante. On considère
+un ensemble de $N$ d'agents -- que l'on confond avec $\{1,\ldots,N\}$, tels que chaque
+agent $i \in \{1,\ldots,N\}$ possède une classe de fonctions admissibles $\mathcal{H}_i$.
+On appelle un classifieur d'un agent un classifieur faible.
+Pour une famille $(h_i)_{1 \leq i \leq N} \in \mathcal{H}_1 \times \cdots \times \mathcal{H}_N$ de
+classifieurs faibles on construira le classifieur global associ\'e $H$ en sommant les
+classifieurs faibles :
+\[
+    H = \sum_{1 \leq i \leq N} h_i.
+\]
+Le problème d'optimisation (\ref{eq:binary_class_opti}) peut donc être mis sous la forme :
+\[
+\begin{aligned}
+    & \underset{h_1,\ldots,h_N}{\text{minimiser}}
+    & & R_{\varphi}(H) \\
+    & \text{s.c.}
+    & & H = \sum_{1 \leq i \leq N} h_i \\
+    &&& h_i \in \mathcal{H}_i, \; 1 \leq i \leq N
+\end{aligned}
+\]
+Enfin, dans le cadre de cet algorithme, on considère que les familles de classifieurs
+faibles admissibles sont des familles param\'etriques. On peut donc de nouveau
+reformuler le problème :
+\[
+\begin{aligned}
+    & \underset{\theta_1,\ldots,\theta_N}{\text{minimiser}}
+    & & R_{\varphi}(H) \\
+    & \text{s.c.}
+    & & H = \sum_{1 \leq i \leq N} h_i \\
+    &&& h_i(\cdot, \theta_i) \in \mathcal{H}_i, \; 1 \leq i \leq N
+\end{aligned}
+\]
+
+\section{Moyennage de dual}
+\label{moyennage_de_dual}
+
+
+\bibliography{distributed_optimization}
+\bibliographystyle{alpha}
+
+\end{document}
+
+

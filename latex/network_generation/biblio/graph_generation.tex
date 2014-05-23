@@ -1,0 +1,402 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+
+\usepackage[]{amsfonts}
+\usepackage[]{amsmath}
+
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+
+\usepackage{color}
+\usepackage{framed}
+\usepackage{comment}
+\definecolor{shadecolor}{gray}{0.875}
+\specialcomment{todo}{\begin{shaded}\begin{bfseries}}{\end{bfseries}\end{shaded}}
+%\excludecomment{todo}
+
+\title{Génération de graphes}
+\author{Igor Colin}
+\date{\today}
+
+\newcommand{\tq}{\text{, }}
+\newcommand{\card}[1]{\mathrm{Card}\left( #1 \right)}
+
+\begin{document}
+
+\section*{Notations et définitions à intégrer}
+
+\begin{itemize}
+    \item Soit $V$ un ensemble donné et soit $E \subseteq V \times V$, on note
+        $G = (V, E)$ le graphe dont les n\oe{}uds sont les éléments de $V$
+        et les arrêtes sont les éléments de $E$. $G$ peut être non-orienté et
+        alors pour $(x, y) \in V \times V$ on a
+        $(x, y) \in E \Leftrightarrow (y, x) \in E$. \'Eventuellement, les
+        arrêtes peuvent posséder des poids, auquel cas on a
+        $E \subseteq V \times V \times K$ où $K$ est l'ensemble des poids
+        possibles.
+    \item Pour $V$ fini de cardinal $N$, on notera $\{X_1, \ldots, X_N\}$
+        les éléments de $V$ et les désignera indifféremment par leur nom
+        ($X_i$) ou leur indice ($i$).
+    \item Dans le cas où $G$ est non-orienté, on notera $(d_i)_{1 \leq i \leq N}$
+        les degrés du graphe. Autrement dit, pour $1 \leq i \leq N$,
+        \[
+            d_i =
+            \mathrm{Card}\left( \left\{
+                X_j \in V \tq (X_i, X_j) \in E
+            \right\} \right)
+        \]
+    \item De nouveau, si $G$ est non-orienté, on note $D^{(1)}$ la distribution
+        des degrés du graphe. Ainsi,
+        \[
+            D^{(1)}: \left\{
+                \begin{array}{r c l}
+                    \mathbb{N} & \rightarrow & [0, 1] \\
+                    k & \mapsto & \frac{\card{\left\{ X_i \tq d_i = k \right\}}}{\card{V}}
+                \end{array}
+            \right.
+        \]
+        On notera également $D^{(2)}$ la distribution jointe des degrés du
+        graphe :
+        \[
+            D^{(2)}: \left\{
+                \begin{array}{r c l}
+                    \mathbb{N} \times \mathbb{N} & \rightarrow & [0, 1] \\
+                    (k, l) & \mapsto &
+                    \frac{\card{ \left\{ (i, j) \in E \tq (d_i, d_j) = (k, l) \right\}}}{\card{E}}
+                \end{array}
+            \right.
+        \]
+    \item Dans le cas où $G$ est orienté, on notera $d^{in}$ et $d^{out}$
+        les degrés respectivement entrants et sortants du graphe. Ainsi,
+        pour $1 \leq i \leq N$,
+        \[
+            \left\{
+                \begin{array}{r c l}
+                    d^{in}_i &=& \card{ \left\{ j \in V \tq (j, i) \in E \right\}} \\
+                    d^{out}_i &=& \card{ \left\{ j \in V \tq (i, j) \in E \right\}} \\
+                \end{array}
+            \right.
+        \]
+    \item Pour la partie algorithmique, on considérera la fonction
+        \texttt{swap} définie dans l'Algorithme~\ref{alg:def_swap}, permettant
+        d'intervertir deux arrêtes.
+    \begin{algorithm}
+        \caption{Définition de la fonction \texttt{swap}}
+        \label{alg:def_swap}
+        \begin{algorithmic}[1]
+            \Function{swap}{$E$, $(x_1, y_1)$, $(x_2, y_2)$}
+                \State $F \gets E \backslash (x_1, y_1)$
+                \State $F \gets F \backslash (x_2, y_2)$
+                \State $F \gets F \cup (x_1, y_2)$
+                \State $F \gets F \cup (x_2, y_1)$
+
+                \Return $F$
+            \EndFunction
+        \end{algorithmic}
+    \end{algorithm}
+
+    \item On définit la distance entre deux n\oe{}uds comme la longueur du plus
+        court chemin entre ces n\oe{}uds. On définit également le diamètre d'un
+        graphe comme étant la plus grande distance possible entre deux
+        n\oe{}uds de ce graphe. Cette notion étant sensible aux effets de bords,
+        on parlera plus souvent de diamètre effectif, c'est-à-dire le 90ème
+        percentile de la distribution des distances.
+
+    \item La matrice d'adjacence associée au graphe $G = (V, E)$ est la matrice
+        $A \in \mathbb{R}^{|V| \times |V|}$ telle que, pour $1 < i, j < |V|$,
+        \[
+            a_{ij} = \mathbf{1}_{\left\{ (i, j) \in E \right\}}
+        \]
+\end{itemize}
+
+\begin{todo}
+Ajout laplacien et modularité
+\end{todo}
+
+\section{Graphes aléatoires}
+\label{sec:graphes_aleatoires}
+
+    \subsection{Modèle de Erdös-Rényi-Gilbert}
+    \label{sub:modele_erdos}
+    Cette catégorie de modèle, introduite dans \cite{erdHos1960evolution},
+    effectue très peu d'hypothèses sur les graphes à générer et permet
+    d'atteindre une grande quantité de graphes d'une taille donnée. Ces modèles
+    possèdent deux paramètres. Le premier paramètre indique le nombre de
+    n\oe{}uds du graphe à générer. Le deuxième paramètre porte sur les arrêtes
+    du graphe ; il n'indique pas nécessairement le nombre d'arrêtes générées
+    mais indique au moins leur probabilité d'occurence.
+
+    Pour $n \in \mathbb{N}^*$ et $0 < p < 1$, le modèle de Gilbert,
+    génère un graphe composé de $n$ n\oe{}uds dont chaque arrête
+    potentielle a une probabilité $p$ d'être présente, indépendamment
+    des autres arrêtes.
+    En général, on choisit $p$ en fonction de $n$ et typiquement
+    $p(n) = o(1)$. \`A noter que dans cette méthode, on ne peut
+    connaître à l'avance le nombre d'arrêtes du graphe généré.
+    Gr\^ace à l'analyse de ce type fournie par \cite{newman2001random},
+    on sait que la probabilité $p_k$ qu'un n\oe{}ud pris au hasard
+    soit de degré $k$ vaut :
+    \[
+        p_k = \binom{|V|}{k} p^k (1 - p)^{N - k}.
+    \]
+    En notant $z = \mathbb{E}\left[|E|\right] = |V|p$, on a le résultat
+    suivant :
+    \[
+        p_k \underset{N \rightarrow +\infty}{\sim}
+        \frac{z^k e^{-z}}{k!},
+    \]
+    ce qui indique que ce modèle tend asymptotiquement vers une
+    distribution des degrés suivant une loi de Poisson.
+
+    \subsection{Modèle $p_1$}
+    Le modèle $p_1$ \cite{holland1981exponential} est développé par Holland et
+    Leinhardt en 1981
+    Les paramètres nécessaires à la génération d'un réseau
+    sont les suivants :
+    \begin{itemize}
+        \item 
+    \end{itemize}
+
+\begin{todo}
+Ajout description de modèles $p_1$, $p_2$
+\end{todo}
+
+\section{Méthodes MCMC}
+\label{sec:methodes_mcmc}
+    Soit $G = (V, E)$ un graphe non orienté.
+    Les méthodes MCMC pour la génération de graphes sont très vastement
+    utilisées (\cite{rao1996markov}). Leur principe général est de partir
+    d'un graphe existant et de modifier aléatoirement ses arrêtes, tout en
+    conservant certaines propriétés du graphe. L'Algorithme~\ref{alg:mcmc_deg}
+    sélectionne aléatoirement deux arrêtes, puis les échange si cela
+    n'entraine ni la création de boucle ni de double arrête.
+
+    \begin{algorithm}
+        \caption{Algorithme MCMC conservant les degrés des n\oe{}uds.}
+        \label{alg:mcmc_deg}
+        \begin{algorithmic}[1]
+            \Require $V, E, N_{max}$
+            \State $E^{(0)} \gets E$
+            \State $i \gets 1$
+            \While{$i \leq N_{max}$}
+                \State $(e_1, e_2) \gets \text{rand}(E^{(i-1)})$
+                \State $(f_1, f_2) \gets \text{rand}(E^{(i-1)})$
+                \If{no loop and no double edge created}
+                    \State $E^{(i)} \gets$
+                        \textbf{swap}($E^{(i-1)}$, $(e_1, e_2)$, $(f_1, f_2)$)
+                \Else
+                    \State $E^{(i)} \gets E^{(i-1)}$
+                \EndIf
+                \State $i \gets i + 1$
+            \EndWhile
+        \end{algorithmic}
+    \end{algorithm}
+
+    Cet algorithme est simple à implémenter et ne nécessite qu'un paramètre :
+    le nombre d'itérations $N_{max}$. En général, on choisit $N_{max}$ de
+    l'ordre de $100 \times |E|$ pour s'assurer un graphe généré indépendant de
+    l'original. Cependant, ce choix est purement empirique et il existe peu
+    de travaux théoriques sur ces critères ; \cite{ray2012we} présente
+    toutefois des résultats intéressants sur des critères d'arrêts spécifiques.
+
+    \begin{algorithm}
+        \caption{Algorithme MCMC pour la génération de graphe.}
+        \label{alg:mcmc_joint}
+        \begin{algorithmic}
+            \Require $V, E, N_{max}$
+            \State $E^{(0)} \gets E$
+            \State $i \gets 1$
+            \While{$i \leq N_{max}$}
+                \State $(e_1, e_2) \gets \text{rand}(E^{(i-1)})$
+                \State $(f_1, f_2) \gets \text{rand}(\left\{ (u, v) \in E^{(i-1)}, d_u = d_{e_1} \right\})$
+                \State $E^{(i)} \gets$
+                    \textbf{swap}($E^{(i-1)}$, $(e_1, e_2)$, $(f_1, f_2)$)
+                \State $i \gets i + 1$
+            \EndWhile \\
+            \Return $(V, E^{(N_{max})})$
+        \end{algorithmic}
+    \end{algorithm}
+
+\begin{todo}
+Ajouter description des résultats théoriques sur les critères d'arrêt
+\end{todo}
+
+\section{Réseaux sociaux}
+\label{sec:reseaux_sociaux}
+    Les réseaux sociaux constituent un type de réseau à part ayant motivé une
+    grande partie des recherches sur la génération de graphes. Tout d'abord en
+    épidémiologie et en sociologie, puis plus récemment pour l'étude des
+    graphes associés aux outils comme Facebook ou Twitter.
+
+    \subsection{Propriétés clés}
+    \label{sub:proprietes_cles}
+        Les réseaux sociaux ont des propriétés particulières qui ont été
+        observées à de nombreuses reprises pour pouvoir reproduire les
+        reproduire ; \cite{Leskovec:2007:GED:1217299.1217301} fournit une
+        analyse détaillée de ces observations. Parmi les propriétés relevées
+        empiriquement sur la forme globale du graphe, on note :
+        \begin{itemize}
+            \item une distribution des degrées suivant une loi puissance.
+                Ainsi, si l'on note $p_k$ la probabilité qu'un n\oe{}ud pris au
+                hasard soit de degré $k$, il existe $\gamma > 0$ et une
+                constante de normalisation $c > 0$ tels que
+                $p_k = ck^{-\gamma}$. Cette observation a été effectuée pour de
+                nombreux réseaux sociaux mais également pour de réseaux de
+                citations, Internet \cite{chen2002origin},ou des réseaux de
+                brevets.
+            \item un petit diamètre. Le diamètre effectif d'un réseau social
+                est souvent faible, de l'ordre de la dizaine.
+\begin{todo}
+Regarder les plots de valeurs singulières/propres
+\end{todo}
+        \end{itemize}
+        Un certain nombre de propriétés liées à l'évolution du réseau ont
+        également été observées :
+        \begin{itemize}
+            \item Le nombre d'arrêtes et le nombre de n\oe{}uds ont une
+                relation puissance :
+                \[
+                    |E| \propto |V|^{\alpha},
+                \]
+                où typiquement $1 < \alpha < 2$. Cela signifie que le réseau a
+                tendance à se densifier lorsqu'il grandit.
+            \item Le diamètre effectif diminue lorsque la taille du réseau
+                augmente. Cette propriété peut paraître contre-intuitive
+                mais la propriété de densification du réseau peut aider à
+                comprendre ce phénomène.
+        \end{itemize}
+
+    \subsection{Algorithmes pour les réseaux sociaux}
+    \label{sub:algorithmes_reseaux_sociaux}
+    \subsubsection{Kronecker}
+    Cet algorithme développé dans \cite{leskovec2005realistic} affiche
+    plusieurs objectifs. Tout d'abord, il souhaite générer des graphes
+    dont les propriétés sont compatibles avec les critères énoncés dans
+    la Section~\ref{sub:proprietes_cles}, tant au niveau des propriétés
+    globales qu'au niveau des propriétés d'évolution.
+
+    Comme son nom l'indique, cet algorithme se base sur la multiplication
+    de Kronecker. Soit deux matrices $A$ et $B$, le produit $A \otimes B$ est
+    défini par :
+    \[
+        A \otimes B =
+        \begin{pmatrix}
+            a_{11}B & \ldots & a_{1n}B \\
+            \vdots & \ddots & \vdots \\
+            a_{m1}B & \ldots & a_{mn}B
+        \end{pmatrix}.
+    \]
+    Soit un graphe de départ $G_0 = (V_0, E_0)$. L'objectif de l'algorithme est
+    d'utiliser le produit de Kronecker pour générer une suite croissante de
+    graphes $\big(G_i = (V_i, E_i)\big)_{0 \leq i \leq N}$ respectant les
+    conditions souhaitées. Pour cela, on considère les matrices d'adjacence
+    respectives $(A^{(i)})_{0 \leq i \leq N}$ des $(G_i)_{0 \leq i \leq N}$. On
+    définit la suite des $(A^{(i)})_{0 \leq i \leq N}$ par la relation de
+    récurrence:
+    \[
+        A^{(i+1)} = \big(A^{(i)}\big)^{\otimes 2}.
+    \]
+    On obtient bien une suite de graphes croissante en taille et on peut
+    montrer que les propriétés souhaitées sont respectées. Afin d'introduire
+    de l'aléatoire dans la génération de ces graphes, au lieu de considérer la
+    matrice d'adjacence, on considère une matrice $\tilde{A}^{(0)}$ à
+    coefficients dans $[0, 1]$ puis on génère la suite
+    $\left( \tilde{A}^{(i)} \right)_{0 \leq i \leq N}$ par la même relation de
+    récurrence. On obtient ainsi une suite de matrices à coefficients dans
+    $[0, 1]$, qui vont représenter la probabilité d'occurence d'une arrête.
+    Ainsi, si pour $0 \leq i \leq N$,
+    \[
+        \mathbb{P}\left( A^{(i)}_{j,k} = 1 \right) = \tilde{A}^{(i)}_{j, k}.
+    \]
+\begin{todo}
+Discussion KronGen $\rightarrow$ quelle distance pour comparer des graphes ?
+\end{todo}
+
+    \subsubsection{Modèle d'attachement par communautés}
+    Ce modèle développé dans \cite{Leskovec:2007:GED:1217299.1217301} cherche
+    de nouveau à respecter les critères imposés mais le raisonnement est cette
+    fois différent : l'idée est maintenant de chercher une interprétation aux
+    observations effectuées sur les réseaux sociaux, d'utiliser cette
+    interprétation pour construire un modèle et enfin vérifier si le modèle
+    ainsi construit respecte bien les contraintes.
+
+    Le point de départ de cet algorithme est le lien puissance entre le nombre
+    de connexions et le nombre de n\oe{}uds du graphe. Derrière ce type de loi
+    se cache souvent une structure recursive. Les auteurs se sont donc orientés
+    vers l'agencement des communautés du graphe : la racine de l'arbre
+    représente le graphe tout entier, ses enfants correspondent au
+    partitionnement en $x$ communautés, qui elles-mêmes peuvent être
+    partitionnées en $y$ communautés et ainsi de suite. Au final, les feuilles
+    de l'arbre seront les n\oe{}uds du graphe. Il n'est pas nécessaire que
+    l'arbre soit homogène pour appliquer cette méthode ; cependant, les
+    démonstrations sont effectuées dans le cas homogène afin de simplifier
+    les raisonnements.
+\begin{todo}
+Check si démontrable pour le cas non-homogène
+\end{todo}
+    Soit $T$ un arbre représentant la structure des communautés du graphe $G_0$.
+    On définit la distance $d_T$ entre deux éléments de l'arbre comme étant la
+    longueur du chemin entre les deux éléments. Le graphe de départ $G_0$ peut
+    soit déjà contenir des éléments qui auront servir à établir la structure
+    des communautés, soit être vide -- auquel cas la structure aura été
+    imposée au préalable.
+    On place ensuite les n\oe{}uds du graphe dans l'arbre $T$ : ces derniers
+    seront les feuilles de l'arbre, rattachés à la plus petite communauté les
+    contenant.
+\begin{todo}
+Ajouter schéma, clarifier explication
+\end{todo}
+    \'A chaque itération, un nouveau n\oe{}ud $n$ arrive dans le réseau. Ce
+    n\oe{}ud est assigné à une communauté et inséré dans l'arbre $T$ comme
+    précédemment. Ensuite, on relie aléatoirement le nouveau n\oe{}ud à ceux
+    déjà présents avec la distribution de probabilité suivante :
+    \[
+        \mathbb{P}\left((n, i) \in E  \right) = c^{-d_T(n, i)} \text{, pour } i \in V,
+    \]
+    où $c$ représente la difficulté pour un utilisateur de se connecter à un
+    autre.
+
+    Cette méthode est relativement intuitive (des individus se tournent plus
+    facilement vers des individus de mêmes centres d'intérêts) et permet de
+    vérifier une partie des conditions de la Section~\ref{sub:proprietes_cles}
+    si $c$ est contenu dans un certain intervalle, dépendant du nombre de
+    sous-communautés dans chaque communauté de l'arbre.
+\begin{todo}
+Ajouter version dynamique de l'attachement par communautés
+\end{todo}
+
+    \subsubsection{Modèle de feu de forêt}
+
+    \section{Modèles dynamiques}
+    \label{sec:modeles_dynamiques}
+    Les modèles précédents permettent de générer des graphes d'une taille
+    donnée soit en créant tout le graphe en une fois, soit en faisant grossir
+    petit à petit le graphe jusqu'à atteindre la taille souhaitée. Même si
+    des contraintes ont parfois été imposées sur la manière dans le graphe
+    pouvait grossir, il n'y avait pas là de véritable modélisation de la
+    dynamique d'un graphe, qui concerne autant l'ajout ou la suppression de
+    n\oe{}uds que les modifications des arrêtes.
+
+    \subsection{Chaînes de Markov en temps discret}
+    \label{sub:markov_discret}
+    Un première approche pour modéliser l'évolution temporelle d'un réseau est
+    de considérer des chaînes de Markov. Dans \cite{blei2007statistical},
+    l'approche en temps discret est retenue et on considère une probabilité de
+    transition de la forme :
+    \[
+        \mathbb{P}(E_t | E_{t-1}) \propto \exp \left( \sum_k \alpha_k s_k(E_t, E_{t-1} \right),
+    \]
+    où les $(s_k)_k$ sont des statistiques du réseau pondérées par les $(\alpha_k)_k$.
+    Les statistiques sont typiquement :
+    \begin{description}
+        \item[Densité des arrêtes :] $s(E_t, E_{t-1}) = \frac{\card{E_t}}{n-1}$
+        \item[Stabilité :] $s(E_t, E_{t-1}) = \frac{\card{E_t \cap E_{t-1}} + \card{E_t^c \cap E_{t-1}^c}}{n-1}$
+        \item[Réciprocité :] $s(E_t, E_{t-1}) = \frac{n}{\card{E_{t-1}}} \sum_{(i,j) \in E_{t-1}} \mathbf{1}_{\{(j,i) \in E_t\}}$
+    \end{description}
+
+\bibliographystyle{alpha}
+\bibliography{network}
+
+\end{document}

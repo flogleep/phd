@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import math
 import pdb
 
-def dual_averaging(x0, f, grad_f, prox, alphas):
+def dual_averaging(x0, f, grad_f, prox, alphas, n_iter_max=100):
     """Return result of dual averaging optimization algorithm.
 
     Inputs:
@@ -25,7 +25,6 @@ def dual_averaging(x0, f, grad_f, prox, alphas):
     x = x0
     z = x.copy()
     #TODO: implement a smart stopping criterion
-    n_iter_max = 100
     current_iter = 0
     stop = False
     values = [f(x0)]
@@ -45,15 +44,10 @@ def dual_averaging(x0, f, grad_f, prox, alphas):
 
         stop = current_iter >= n_iter_max
 
-    plt.subplot(121)
-    plt.plot(u0s[:, 0], u0s[:, 1], 'o-', linewidth=3, color='r')
-    plt.subplot(122)
-    plt.plot(values)
-    plt.show()
-    return x
+    return (x, values)
 
 
-def distributed_dual_averaging(x0, fs, grads_f, prox, alphas, p):
+def distributed_dual_averaging(x0, fs, grads_f, prox, alphas, p, n_iter_max=100):
     """Return result of distributed dual averaging algorithm.
 
     Inputs:
@@ -76,9 +70,9 @@ def distributed_dual_averaging(x0, fs, grads_f, prox, alphas, p):
     av_xs = [x0.copy() for i in xrange(n)]
     zs = [x0.copy() for i in xrange(n)]
     #TODO: implement a smart stopping criterion
-    n_iter_max = 100
     current_iter = 0
     stop = False
+    values = [fs(0, x0)]
 
     while not stop:
         current_iter += 1
@@ -90,8 +84,10 @@ def distributed_dual_averaging(x0, fs, grads_f, prox, alphas, p):
             for k in xrange(len(p[i])):
                 zs[i] += p[i, k] * zs[k]
             xs[i] = prox(zs[i], alpha)
+            if i == 0:
+                values.append(fs(0, xs[0]))
             av_xs[i] = (current_iter * av_xs[i] + xs[i]) / (current_iter + 1)
 
         stop = current_iter >= n_iter_max
 
-    return av_xs
+    return (xs, values)

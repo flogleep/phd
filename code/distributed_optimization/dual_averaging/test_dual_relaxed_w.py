@@ -10,7 +10,7 @@ x = np.vstack([.5 * np.random.randn(n / 2, 2) + np.array([3., 3.]),
                .5 * np.random.randn(n / 2, 2) + np.array([-3., -3.])
                ])
 
-spr = 5.0 / n
+spr = 10.0 / (n * n)
 
 def mega_norm(u):
     """Return norm1 of differences."""
@@ -63,10 +63,13 @@ def grad_relaxed(u, x, spr, w):
 
 d = mega_norm(x)
 eps = 1e-8
-w = 1 / np.maximum(d, eps * np.ones(d.shape))
-#w = np.zeros((n, n))
-#w[:(n / 2), :(n / 2)] = 1
-#w[(n / 2):, (n / 2):] = 1
+w1 = 1 / np.maximum(d, eps * np.ones(d.shape))
+w1 = w1 / np.linalg.norm(w1)
+w2 = np.zeros((n, n))
+w2[:(n / 2), :(n / 2)] = 1
+w2[(n / 2):, (n / 2):] = 1
+w2 = w2 / np.linalg.norm(w2)
+w = w1
 f = lambda u: relaxed_clustering(u, x, spr, w)
 fs = lambda i, u: dist_relaxed_clustering(i, u, x, spr, w)
 grad_f = lambda u: grad_relaxed(u, x, spr, w)
@@ -103,18 +106,48 @@ alphas = [1. / math.sqrt(t) for t in xrange(1, 1000)]
 #plt.ylim([min_bound, max_bound])
 #plt.show()
 
-new_u = da.dual_averaging(u, f, grad_f, prox, alphas)
-plt.scatter(x[:(n / 2),0], x[:(n / 2),1], marker='+', color='b')
-plt.scatter(x[(n / 2):,0], x[(n / 2):,1], marker='+', color='r')
-plt.scatter(new_u[:(n / 2),0], new_u[:(n / 2),1], marker='o', color='b')
-plt.scatter(new_u[(n / 2):,0], new_u[(n / 2):,1], marker='o', color='r')
-plt.title('f(u) = {0:.2}'.format(f(new_u)))
-plt.show()
+#new_u, values1 = da.dual_averaging(u, f, grad_f, prox, alphas, 20)
+#plt.scatter(x[:(n / 2),0], x[:(n / 2),1], marker='+', color='b')
+#plt.scatter(x[(n / 2):,0], x[(n / 2):,1], marker='+', color='r')
+#plt.scatter(new_u[:(n / 2),0], new_u[:(n / 2),1], marker='o', color='b')
+#plt.scatter(new_u[(n / 2):,0], new_u[(n / 2):,1], marker='o', color='r')
+#plt.title('f(u) = {0:.2}'.format(f(new_u)))
+#plt.show()
+#
+#w = w2
+#new_u, values2 = da.dual_averaging(u, f, grad_f, prox, alphas, 20)
+#plt.scatter(x[:(n / 2),0], x[:(n / 2),1], marker='+', color='b')
+#plt.scatter(x[(n / 2):,0], x[(n / 2):,1], marker='+', color='r')
+#plt.scatter(new_u[:(n / 2),0], new_u[:(n / 2),1], marker='o', color='b')
+#plt.scatter(new_u[(n / 2):,0], new_u[(n / 2):,1], marker='o', color='r')
+#plt.title('f(u) = {0:.2}'.format(f(new_u)))
+#plt.show()
+#
+#plt.plot(values1, linewidth=3, label='w = 1/d')
+#plt.plot(values2, linewidth=3, label='w = Phi_p')
+#plt.legend()
+#plt.xlabel('Iteration')
+#plt.ylabel('f')
+#plt.show()
 
-p = np.ones((n, n)) / (n - 1)
+
+
+#p = np.ones((n, n)) / (n - 1)
+p = np.zeros((n, n))
+p[(n / 4):(3 * n / 4), (n / 4):(3 * n / 4)] = 1. / (n / 2)
+
 for i in xrange(n):
     p[i, i] = 0
-dist_u = da.distributed_dual_averaging(u, fs, grads_f, prox, alphas, p)
+w = w1
+dist_u, values1 = da.distributed_dual_averaging(u, fs, grads_f, prox, alphas, p)
+w = w2
+dist_u, values2 = da.distributed_dual_averaging(u, fs, grads_f, prox, alphas, p)
+plt.plot(values1, linewidth=3, label='w = 1/d')
+plt.plot(values2, linewidth=3, label='w = Phi_p')
+plt.legend()
+plt.xlabel('Iteration')
+plt.ylabel('f')
+plt.show()
 for i in xrange(4):
     plt.subplot(2, 2, i)
     plt.scatter(x[:(n / 2),0], x[:(n / 2),1], marker='+', color='b')
