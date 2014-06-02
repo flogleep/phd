@@ -2,7 +2,7 @@
 %     Created: Fri May 23 04:00 PM 2014 C
 % Last Change: Fri May 23 04:00 PM 2014 C
 %
-\documentclass[a4paper]{beamer}
+\documentclass[a4paper, c]{beamer}
 
 \usepackage[utf8]{inputenc}
 \usepackage[french]{babel}
@@ -10,29 +10,26 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 
+\DeclareMathOperator*{\argmin}{arg\,min}
+
 \begin{document}
 
 \begin{frame}
-    \frametitle{Problème}
+    \frametitle{Modèle}
 
-    \begin{itemize}
-        \item $(X_i)_{1 \leq i \leq n} \in (\mathbb{R}^d)^n$
-        \item $\mathcal{P}$ : ensemble des partitions de $\{1, \ldots, n\}$
-        \item Problème de \emph{clustering} :
-        \[
-                \min_{P \in \mathcal{P}} f(P) = \frac{1}{n^2} \sum_{1 \leq i,j \leq n}
-                D(X_i, X_j) \Phi_P(X_i,X_j)
-            \]
-        \item Autre formulation :
-            \[
-                \min_{P \in \mathcal{P}} \frac{1}{n} \sum_{i=1}^n f_i(P)
-                = \frac{1}{n} \sum_{i=1}^n \left( \frac{1}{n}
-                \sum_{j=1}^n D(X_i, X_j) \Phi_P(X_i,X_j) \right)
-            \]
-
-        \item On aimerait pouvoir estimer
-            $\mathbb{E}\left[ D(x, X) \Phi_P(x, X) \right]$
-    \end{itemize}
+    \begin{columns}
+        \begin{column}{.5\textwidth}
+            \begin{itemize}
+                \item $G = (V, E)$
+                \item $V = \{1,\ldots,n\}$
+                \item Caractéristiques : $(X_i)_{1\leq i \leq n}$
+            \end{itemize}
+        \end{column}
+        \begin{column}{.5\textwidth}
+            bla
+        \end{column}
+    \end{columns}
+    Objectif : regrouper par similarité suivant les caractéristiques
 \end{frame}
 
 \end{document}
