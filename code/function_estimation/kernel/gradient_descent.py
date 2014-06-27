@@ -106,11 +106,11 @@ print 'thetas : ' + str(thetas.shape)
 ws = np.ones(thetas.shape[0]) / thetas.shape[0]
 a = 0.
 #steps = [.01 for i in xrange(1, 2 * n_it)]
-eta = .9
+eta = .95
 values = [r_tilde(thetas, ws, a, sample, ref)]
 print 'r_tilde = ' + str(values[0])
 print 'step 2'
-step = 10.
+step = 1.
 while it <= n_it:
     print str(it) + ' : ' + str(values[-1]) + ' (' + str(step) + ')'
     step /= eta
@@ -140,7 +140,8 @@ zs = np.array([big_h(np.array([x, y]), thetas, ws, a) for x, y in zip(np.ravel(X
 Z = zs.reshape(X.shape)
 fig = plt.figure()
 ax = fig.add_subplot(221, projection='3d')
-ax.plot_surface(X, Y, Z, cmap=cm.coolwarm, antialiased=True, linewidth=0, rstride=1, cstride=1)
+ax.plot_surface(X, Y, Z, cmap=cm.coolwarm, vmin=0., vmax=1.5,
+                antialiased=True, linewidth=0, rstride=1, cstride=1)
 ax.set_xlim(-2., 2.)
 ax.set_ylim(-2., 2.)
 ax.set_zlim(.2, .8)
@@ -152,12 +153,13 @@ u = Z.copy()
 Z = zs.reshape(X.shape)
 
 ax = fig.add_subplot(222, projection='3d')
-ax.plot_surface(X, Y, Z, cmap=cm.coolwarm, antialiased=True, linewidth=0, rstride=1, cstride=1)
+ax.plot_surface(X, Y, Z, cmap=cm.coolwarm, vmin=0., vmax=1.5,
+                antialiased=True, linewidth=0, rstride=1, cstride=1)
 ax.set_xlim(-2., 2.)
 ax.set_ylim(-2., 2.)
 ax.set_zlim(.2, .8)
 ax = fig.add_subplot(224)
-levels = np.array([.1, .5, 1., 2.])
+levels = np.array([.005, .01, .1, .5, 1., 2.])
 cs = ax.contour((u - Z) ** 2, levels)
 ax.clabel(cs, inline=1, fontsize=10)
 plt.show()
