@@ -1,0 +1,40 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage[]{amsmath}
+\usepackage[]{amsfonts}
+
+\author{Igor Colin}
+\date{\today}
+\title{Distributed estimation of an expectation}
+
+\begin{document}
+
+We want to solve the problem of estimating the function:
+\begin{equation}
+    \label{eq:original_expectation}
+    f : x \mapsto
+    \mathbb{E}_X\left[ D(x,X) \Phi_P(x,X) \right]
+\end{equation}
+where $X \in \mathcal{X}$ is a random variable with some unknown distribution
+$\mu$.
+
+Let $(x_1, \ldots, x_n) \in \mathcal{X}^n$ be a sample of observations of $X$.
+We can use these observations to estimate the function $f$ defined in
+(\ref{eq:original_expectation}):
+\begin{equation}
+    \tilde{f} : x \mapsto
+    \frac{1}{n} \sum_{i=1}^n D(x,x_i) \Phi_P(x,x_i)
+\end{equation}
+
+However, as there will be some constraints on the sample accessibility, we
+cannot use this formulation to provide an estimate. Instead, we are looking
+for a estimator $H(\cdot;\mathbb{\theta}) : x \mapsto H(x;\mathbb{\theta})$,
+where $\mathbb{\theta}$ is a vector of parameters that does not involve
+\emph{directly} the sample of observations.
+
+\end{document}
+
+

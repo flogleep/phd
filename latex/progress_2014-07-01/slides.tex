@@ -1,0 +1,161 @@
+\documentclass[c]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+\usepackage{graphicx}
+\graphicspath{{./images/}}
+
+\title{Estimation distribu\'ee d'une esp\'erance conditionnelle}
+\author{Igor Colin}
+\date{\today}
+
+\setbeamertemplate{navigation symbols}{}
+
+\AtBeginSection[]
+{
+    \begin{frame}<beamer>
+        \tableofcontents[currentsection]
+    \end{frame}
+}
+
+\begin{document}
+
+\begin{frame}
+  \maketitle
+\end{frame}
+
+\section{Rappels}
+
+\begin{frame}
+  \frametitle{Objectif et formulation}
+
+  \begin{itemize}
+    \item Objectif : regrouper les utilisateurs par centres d'int\'erêts communs
+    \item Notations :
+      \begin{itemize}
+        \item $(X_i)_{1 \leq i \leq n}$ : caract\'eristiques des utilisateurs (musiques,
+          historique des conversations, etc.)
+        \item $D : (X, Y) \mapsto D(X, Y)$ : fonction de dissimilarit\'e entre deux
+          vecteurs de caract\'eristiques
+        \item $P$ : partition des utilisateurs
+        \item $\Phi_P$ : fonction d'appartenance au même \emph{cluster}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Probl\`eme}
+
+  \begin{itemize}
+    \item Nouvel objectif : trouver la solution du probl\`eme
+      \[
+      \min_P w(P) = \frac{1}{n} \sum_{i =1}^n \frac{1}{n} \sum_{j=1}^{n} D(X_i, X_j) \Phi_P(X_i, X_j)
+      \]
+    \item Id\'ee : estimer $f : x \mapsto \mathbb{E}[D(x, X) \Phi_P(x, X)]$
+    \item Contrainte : les $(X_i)_{1 \leq i \leq n}$ ne sont pas simultan\'ement accessibles
+  \end{itemize}
+\end{frame}
+
+\section{Estimation de fonction}
+
+\begin{frame}
+  \frametitle{M\'ethode g\'en\'erale de regression}
+
+  \begin{columns}
+    \begin{column}{.6\textwidth}
+      \begin{itemize}
+        \item Notations :
+        \begin{itemize}
+          \item<1-> $f$ : fonction à estimer
+          \item<2-> $\left\{ \left( x_i, f(x_i) \right) \right\}_{1 \leq i \leq n}$ : observations
+          \item<3-> $\hat{f} : (x; \theta) \mapsto \hat{f}(x; \theta)$ : estimateur
+          \item<4-> $\hat{R} : \theta \mapsto \hat{R}(\theta)$ : risque empirique
+        \end{itemize}
+      \end{itemize}
+    \end{column}
+    \begin{column}{.4\textwidth}
+      \only<1>{
+        \includegraphics[width=.9\textwidth]{regression_f}
+      }
+      \only<2>{
+        \includegraphics[width=.9\textwidth]{regression_obs}
+      }
+      \only<3->{
+        \includegraphics[width=.9\textwidth]{regression_several-thetas}
+      }
+    \end{column}
+  \end{columns}
+  \begin{itemize}
+    \item<5-> Objectif : trouver $\theta^*$ solution de
+      \[
+        \min_{\theta \in \Theta} \hat{R}\left( \theta \right)
+      \]
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exemple}
+
+  \begin{itemize}
+    \item Exemple : estimation polynomiale
+      \begin{itemize}
+        \item $\hat{f} : (x; \theta) \mapsto \theta_0 + \theta_1 x + \theta_2 x^2$,
+        \item $\hat{R}(\theta) = \sum_{i = 1}^n \left( \hat{f}(x_i) - f(x_i) \right)^2$
+      \end{itemize}
+    \item Qualit\'e d\'ependante du choix de $\hat{f}$
+  \end{itemize}
+  \begin{columns}
+    \begin{column}{.5\textwidth}
+      \begin{figure}
+        \centering
+        \includegraphics[width=.9\textwidth]{regression_good-choice}
+        \caption{$\hat{f}$ adapt\'ee.}
+      \end{figure}
+    \end{column}
+    \begin{column}{.5\textwidth}
+      \begin{figure}
+        \centering
+        \includegraphics[width=.9\textwidth]{regression_poor-choice}
+        \caption{$\hat{f}$ non adapt\'ee.}
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Application au problème initial}
+
+  \begin{itemize}
+    \item Fonction à estimer : $f : x \mapsto \mathbb{E}\left[ D(x,X) \Phi_P(x,X) \right]$
+    \item Risque empirique : moindres carr\'es
+    \item Estimateur à noyaux :
+      \[
+          \hat{f}(x; \mathbf{\theta}, \mathbf{w}) = \sum_{k=1}^K w_k h(x - \theta_k)
+      \]
+      où $h$ est un noyau gaussien.
+  \end{itemize}
+  \texttt{Ajout figures noyaux 1D/2D}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Résultats}
+
+    \texttt{Estimation pour l'exemple de 2 nuages gaussiens}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Contrainte supplémentaire}
+
+    \begin{itemize}
+        \item $\tilde{f}(X_i)$ non accessible
+        \item Idée : chaque agent estime $f(x)$ à partir de l'information disponible
+            puis distribue le calcul
+    \end{itemize}
+\end{frame}
+
+\end{document}
