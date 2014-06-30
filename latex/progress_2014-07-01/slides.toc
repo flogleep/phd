@@ -1,4 +1,0 @@
-\beamer@endinputifotherversion {3.10pt}
-\select@language {french}
-\beamer@sectionintoc {1}{Rappels}{2}{0}{1}
-\beamer@sectionintoc {2}{Estimation de fonction}{5}{0}{2}
