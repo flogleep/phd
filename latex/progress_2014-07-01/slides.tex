@@ -53,7 +53,7 @@
   \begin{itemize}
     \item Nouvel objectif : trouver la solution du probl\`eme
       \[
-      \min_P w(P) = \frac{1}{n} \sum_{i =1}^n \frac{1}{n} \sum_{j=1}^{n} D(X_i, X_j) \Phi_P(X_i, X_j)
+      \min_P w(P) = \frac{1}{n} \sum_{i =1}^n \left( \frac{1}{n} \sum_{j=1}^{n} D(X_i, X_j) \Phi_P(X_i, X_j) \right)
       \]
     \item Id\'ee : estimer $f : x \mapsto \mathbb{E}[D(x, X) \Phi_P(x, X)]$
     \item Contrainte : les $(X_i)_{1 \leq i \leq n}$ ne sont pas simultan\'ement accessibles
@@ -78,6 +78,7 @@
       \end{itemize}
     \end{column}
     \begin{column}{.4\textwidth}
+        \begin{figure}
       \only<1>{
         \includegraphics[width=.9\textwidth]{regression_f}
       }
@@ -87,6 +88,7 @@
       \only<3->{
         \includegraphics[width=.9\textwidth]{regression_several-thetas}
       }
+  \end{figure}
     \end{column}
   \end{columns}
   \begin{itemize}
@@ -105,7 +107,7 @@
     \item Exemple : estimation polynomiale
       \begin{itemize}
         \item $\hat{f} : (x; \theta) \mapsto \theta_0 + \theta_1 x + \theta_2 x^2$,
-        \item $\hat{R}(\theta) = \sum_{i = 1}^n \left( \hat{f}(x_i) - f(x_i) \right)^2$
+        \item $\hat{R}(\theta) = \frac{1}{2n} \sum_{i = 1}^n \left( \hat{f}(x_i) - f(x_i) \right)^2$
       \end{itemize}
     \item Qualit\'e d\'ependante du choix de $\hat{f}$
   \end{itemize}
@@ -135,17 +137,63 @@
     \item Risque empirique : moindres carr\'es
     \item Estimateur à noyaux :
       \[
-          \hat{f}(x; \mathbf{\theta}, \mathbf{w}) = \sum_{k=1}^K w_k h(x - \theta_k)
+          \hat{f}(x; \mathbf{\theta}, \mathbf{w}, a) = a + \sum_{j=1}^m w_j K(x - \theta_j)
       \]
-      où $h$ est un noyau gaussien.
+      où $K$ est un noyau gaussien.
   \end{itemize}
-  \texttt{Ajout figures noyaux 1D/2D}
+  \begin{columns}
+      \begin{column}{.5\textwidth}
+          \begin{figure}
+              \centering
+              \includegraphics[width=.7\textwidth]{gaussian_kernel_1d}
+              \caption{Noyau gaussien 1D}
+          \end{figure}
+      \end{column}
+      \begin{column}{.5\textwidth}
+          \begin{figure}
+              \centering
+              \includegraphics[width=.7\textwidth]{gaussian_kernel_2d}
+              \caption{Noyau gaussien 2D}
+          \end{figure}
+      \end{column}
+  \end{columns}
+
 \end{frame}
 
 \begin{frame}
     \frametitle{Résultats}
 
-    \texttt{Estimation pour l'exemple de 2 nuages gaussiens}
+    \begin{itemize}
+        \item Application :
+            \begin{itemize}
+                \item $D : (x, y) \mapsto \|x - y\|_2$
+                \item $(X_i)_{1 \leq i \leq n}$ : $n$ tirages d'un mélange de gaussiennes
+                \item Observations empiriques $\tilde{f}(x_i) = \frac{1}{n} \sum_{j=1}^n D(x_i, x_j) \Phi_p(x_i, x_j)$
+            \end{itemize}
+        \item Objectif :
+            \[
+                \min_{\theta, w, a} \hat{R}(\theta, w, a)
+                = \frac{1}{2n} \sum_{i= 1}^n \left( \hat{f}(x; \theta, w, a) - \tilde{f}(x_i) \right)^2
+            \]
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Résultats optimisation globale}
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=.8\textwidth]{kernel_estimation_global}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Résultats optimisation distribuée}
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=.8\textwidth]{kernel_estimation_global}
+    \end{figure}
 \end{frame}
 
 \begin{frame}
@@ -153,9 +201,26 @@
 
     \begin{itemize}
         \item $\tilde{f}(X_i)$ non accessible
-        \item Idée : chaque agent estime $f(x)$ à partir de l'information disponible
-            puis distribue le calcul
+        \item Idée : si l'agent $i$ a accès aux caractéristiques $(X_j)_{j \in \mathcal{A}_i}$
+            ($i \in \mathcal{A}_i$), il peut :
+            \begin{itemize}
+                \item estimer la distribution des $X$ à partir des observations
+                    accessibles
+                \item utiliser le risque $R_i$ :
+                    \[
+                        R_i : (\theta, w, a) \mapsto \mathbb{E}_{\mu_i} \left[ \left( \hat{f}(x; \theta, w, a) - \mathbb{E}_{\mu_i}[D(x, X) \Phi_P(x, X)]\right)^2 \right]
+                    \]
+            \end{itemize}
+        \item Le problème devient alors
+            \[
+                \min_{\theta, w, a} \frac{1}{n} \sum_{i = 1}^n R_i(\theta, w, a)
+            \]
     \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Résultats}
+
 \end{frame}
 
 \end{document}
