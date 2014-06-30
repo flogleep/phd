@@ -3,6 +3,7 @@
 import numpy as np
 import pdb
 import matplotlib.pyplot as plt
+from agent import *
 
 
 SIGMA = 1.
@@ -49,6 +50,17 @@ def grad_theta_big_h(x, thetas, ws, a):
         g[i, :] = grad_h(x, thetas[i, :])
     return g
 
+def grad_w_big_h(x, thetas, ws, a):
+    return np.array([h(x, theta) for theta in thetas])
+
+def grad_a_big_h(x, thetas, ws, a):
+    return 1.
+
+def grad_big_h(x, thetas, ws, a):
+    return ((grad_theta_big_h(x, thetas, ws, a),
+             grad_w_big_h(x, thetas, ws, a),
+             grad_a_big_h(x, thetas, ws, a)))
+
 def f(x, y):
     return d(x, y) * phi_p(x, y)
 
@@ -59,4 +71,48 @@ def r(thetas, ws, a, mc_generator):
 def grad_theta_r(thetas, ws, a, mc_generator):
     est_f = lambda x: grad_theta_big_h(x, thetas, ws, a) \
             * big_h(x, thetas, ws, a) - cond_expectation(f, mc_generator, x, n_mc)
+    return expectation(est_f, mc_generator, n_mc)
 
+def grad_w_r(thetas, ws, a, mc_generator):
+    est_f = lambda x: grad_w_big_h(x, thetas, ws, a) \
+            * big_h(x, thetas, ws, a) - cond_expectation(f, mc_generator, x, n_mc)
+    return expectation(est_f, mc_generator, n_mc)
+
+def grad_a_r(thetas, ws, a, mc_generator):
+    est_f = lambda x: grad_a_big_h(x, thetas, ws, a) \
+            * big_h(x, thetas, ws, a) - cond_expectation(f, mc_generator, x, n_mc)
+    return expectation(est_f, mc_generator, n_mc)
+
+def grad_r(thetas, ws, a, mc_generator):
+    return ((grad_theta_r(x, thetas, ws, a),
+             grad_w_r(x, thetas, ws, a),
+             grad_a_r(x, thetas, ws, a)))
+
+mu_1 = np.array([1., 1.])
+mu_2 = np.array([-1., -1.])
+sigma_1 = .5
+sigma_2 = .5
+
+max_x = 3.
+max_y = 3.
+min_x = -3.
+min_y = -3.
+dx = .1
+dy = .1
+
+x = np.arange(min_x, max_x, dx)
+y = np.arange(min_y, max_y, dy)
+X, Y = np.meshgrid(x, y)
+
+n = 200
+sample_1 = gen_1(n / 2)
+sample_2 = gen_2(n / 2)
+xs_0 = np.vstack((sample_1[:(n/4),:], sample_2[:(n/4),:]))
+xs_1 = np.vstack((sample_1[(n/4):,:], sample_2[(n/4):,:]))
+mc_gen_0 = lambda : mc_generator(xs_0)
+mc_gen_1 = lambda : mc_generator(xs_1)
+prox : lambda z, alpha: -alpha * z
+agent_0 = Agent(r, grad_r,
+
+
+sample = np.vstack((sample_1, sample_2))
