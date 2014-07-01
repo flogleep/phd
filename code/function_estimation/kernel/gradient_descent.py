@@ -92,7 +92,7 @@ def ref(x):
 
 print 'step 1'
 
-n_it = 200
+n_it = 1000
 it = 1
 temp_x = np.arange(min_x, max_x, 1.5)
 temp_y = np.arange(min_y, max_y, 1.5)
@@ -139,27 +139,37 @@ while it <= n_it:
 zs = np.array([big_h(np.array([x, y]), thetas, ws, a) for x, y in zip(np.ravel(X), np.ravel(Y))])
 Z = zs.reshape(X.shape)
 fig = plt.figure()
-ax = fig.add_subplot(221, projection='3d')
+ax = fig.add_subplot(111, projection='3d')
 ax.plot_surface(X, Y, Z, cmap=cm.coolwarm, vmin=0., vmax=1.5,
                 antialiased=True, linewidth=0, rstride=1, cstride=1)
 ax.set_xlim(-2., 2.)
 ax.set_ylim(-2., 2.)
 ax.set_zlim(.2, .8)
-ax = fig.add_subplot(223)
+plt.savefig('regression_3d-est.pdf')
+fig = plt.figure()
+ax = fig.add_subplot(111)
 ax.imshow(Z)
+plt.savefig('regression_2d-est.pdf')
 
 zs = np.array([ref(np.array([x, y])) for x, y in zip(np.ravel(X), np.ravel(Y))])
 u = Z.copy()
 Z = zs.reshape(X.shape)
 
-ax = fig.add_subplot(222, projection='3d')
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
 ax.plot_surface(X, Y, Z, cmap=cm.coolwarm, vmin=0., vmax=1.5,
                 antialiased=True, linewidth=0, rstride=1, cstride=1)
 ax.set_xlim(-2., 2.)
 ax.set_ylim(-2., 2.)
 ax.set_zlim(.2, .8)
-ax = fig.add_subplot(224)
-levels = np.array([.005, .01, .1, .5, 1., 2.])
-cs = ax.contour((u - Z) ** 2, levels)
-ax.clabel(cs, inline=1, fontsize=10)
-plt.show()
+plt.savefig('regression_3d-ref.pdf')
+fig = plt.figure()
+ax = fig.add_subplot(111)
+ax.imshow(Z)
+plt.savefig('regression_2d-ref.pdf')
+#fig = plt.figure()
+#ax = fig.add_subplot(111)
+#levels = np.array([.005, .01, .1, .5, 1., 2.])
+#cs = ax.contour((u - Z) ** 2, levels)
+#ax.clabel(cs, inline=1, fontsize=10)
+#plt.show()

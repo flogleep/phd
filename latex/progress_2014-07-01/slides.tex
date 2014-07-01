@@ -63,7 +63,7 @@
 \section{Estimation de fonction}
 
 \begin{frame}
-  \frametitle{M\'ethode g\'en\'erale de regression}
+  \frametitle{M\'ethode g\'en\'erale de régression}
 
   \begin{columns}
     \begin{column}{.6\textwidth}
@@ -167,7 +167,7 @@
         \item Application :
             \begin{itemize}
                 \item $D : (x, y) \mapsto \|x - y\|_2$
-                \item $(X_i)_{1 \leq i \leq n}$ : $n$ tirages d'un mélange de gaussiennes
+                \item $(X_i)_{1 \leq i \leq n}$ : $n$ tirages d'un mélange de gaussiennes 2D
                 \item Observations empiriques $\tilde{f}(x_i) = \frac{1}{n} \sum_{j=1}^n D(x_i, x_j) \Phi_p(x_i, x_j)$
             \end{itemize}
         \item Objectif :
@@ -180,20 +180,42 @@
 
 \begin{frame}
     \frametitle{Résultats optimisation globale}
-
-    \begin{figure}
-        \centering
-        \includegraphics[width=.8\textwidth]{kernel_estimation_global}
-    \end{figure}
+    \begin{columns}
+        \begin{column}{.5\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=.8\textwidth]{regression_3d-ref}
+                \caption{Fonction $f$}
+            \end{figure}
+        \end{column}
+        \begin{column}{.5\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=.8\textwidth]{regression_3d-est}
+                \caption{Estimation $\hat{f}(\cdot, \theta^*)$}
+            \end{figure}
+        \end{column}
+    \end{columns}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Résultats optimisation distribuée}
-
-    \begin{figure}
-        \centering
-        \includegraphics[width=.8\textwidth]{kernel_estimation_global}
-    \end{figure}
+    \frametitle{Résultats optimisation globale (2)}
+    \begin{columns}
+        \begin{column}{.5\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=.8\textwidth]{regression_2d-ref}
+                \caption{Fonction $f$}
+            \end{figure}
+        \end{column}
+        \begin{column}{.5\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=.8\textwidth]{regression_2d-est}
+                \caption{Estimation $\hat{f}(\cdot, \theta^*)$}
+            \end{figure}
+        \end{column}
+    \end{columns}
 \end{frame}
 
 \begin{frame}
@@ -206,6 +228,9 @@
             \begin{itemize}
                 \item estimer la distribution des $X$ à partir des observations
                     accessibles
+                    \[
+                        \mu_i(x) = \frac{1}{|\mathcal{A}_i|} \sum_{j \in \mathcal{A}_i} \frac{1}{h} K\left(\frac{x - x_j}{h}\right)
+                    \]
                 \item utiliser le risque $R_i$ :
                     \[
                         R_i : (\theta, w, a) \mapsto \mathbb{E}_{\mu_i} \left[ \left( \hat{f}(x; \theta, w, a) - \mathbb{E}_{\mu_i}[D(x, X) \Phi_P(x, X)]\right)^2 \right]
